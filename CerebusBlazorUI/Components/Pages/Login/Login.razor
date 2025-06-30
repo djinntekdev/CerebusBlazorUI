@@ -1,0 +1,20 @@
+﻿@page "/Login"
+<h3>Login</h3>
+
+<div>
+    <FluentLabel> Username: </FluentLabel>
+    <FluentTextField @bind-Value=dUsername Maxlength="25" Autofocus="true" Required=true>
+        <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
+    </FluentTextField>
+    <FluentLabel> Password: </FluentLabel>
+    <FluentTextField @bind-Value=dPassword Maxlength="16" TextFieldType="TextFieldType.Password" >
+        <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
+    </FluentTextField>
+    <hr />
+    <FluentButton Appearance="Appearance.Accent">Login</FluentButton> <FluentButton>Clear</FluentButton>
+</div>
+
+@code {
+    string? dUsername;
+    string? dPassword;
+}
