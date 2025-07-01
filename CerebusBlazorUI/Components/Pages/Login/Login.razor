@@ -13,15 +13,15 @@
         <FluentGridItem lg="6"  >
             <div class="card">
                 <FluentLabel> Username: </FluentLabel>
-                <FluentTextField @bind-Value=credentials.Username Maxlength="25" Autofocus="true" Required=true>
+                <FluentTextField Value="@credentials.Username" ValueChanged="@((string newValue) => OnUsernameChanged(newValue))" Maxlength="25" Autofocus="true" Required="true" >
                     <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
                 </FluentTextField>
                 <FluentLabel> Password: </FluentLabel>
-                <FluentTextField @bind-Value=credentials.Password Maxlength="16" TextFieldType="TextFieldType.Password" >
+                <FluentTextField Value="@credentials.Password" ValueChanged="@((string newValue) => OnPasswordChanged(newValue))" Maxlength="16" TextFieldType="TextFieldType.Password" Required="true">
                     <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
                 </FluentTextField>
                 <hr />
-                <FluentButton Appearance="Appearance.Accent" OnClick="@StartLogin">Login</FluentButton> <FluentButton>Clear</FluentButton>
+                <FluentButton Appearance="Appearance.Accent" OnClick="@StartLogin" Disabled=@buttonsDisabled>Login</FluentButton> <FluentButton Disabled=@buttonsDisabled>Clear</FluentButton>
 
             </div>
         </FluentGridItem>
@@ -34,8 +34,56 @@
 
 @code {
     LoginCredentials credentials = new LoginCredentials();
+    bool buttonsDisabled = true; 
 
+    void OnUsernameChanged(string newValue)
+    {
+        if (newValue != null && !string.IsNullOrWhiteSpace(newValue))
+        {
+            if (newValue.Length > 0)
+            {
+                buttonsDisabled = false;
+                credentials.Username = newValue;
+            }
+            else
+            {
+                buttonsDisabled = true;
+                credentials.Username = string.Empty;
+            }
+        }
+        else
+        {
+            buttonsDisabled = true;
+            credentials.Username = string.Empty;
+        }
 
+        StateHasChanged();
+    }
+
+void OnPasswordChanged(string newValue)
+    {
+        if (newValue != null && !string.IsNullOrWhiteSpace(newValue))
+        {
+            if (newValue.Length > 0)
+            {
+                buttonsDisabled = false;
+                credentials.Password = newValue;
+            }
+            else
+            {
+                buttonsDisabled = true;
+                credentials.Password = string.Empty;
+            }
+        }
+        else
+        {
+            buttonsDisabled = true;
+            credentials.Password = string.Empty;
+        }
+
+        StateHasChanged();
+        // Perform some other actions 
+    }
 
     private async Task StartLogin() 
     {
@@ -49,40 +97,38 @@
             IDialogReference? dialog;
             DialogResult? messageBoxResult;
 
-            if (string.IsNullOrWhiteSpace(credentials.Username)
-                || string.IsNullOrWhiteSpace(credentials.Password)
-                || !credentials.Username.Equals(username)
-                || !credentials.Password.Equals(password))
-            {
-                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
-                messageBoxResult = await dialog.Result;
-                canceled = messageBoxResult.Cancelled;
-            }
-
-             @* if (string.IsNullOrWhiteSpace(credentials.Password))
-            {
-                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
-                messageBoxResult = await dialog.Result;
-                canceled = messageBoxResult.Cancelled;
-            }
-
-            if (!credentials.Username.Equals(username))
-            {
-                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
-                messageBoxResult = await dialog.Result;
-                canceled = messageBoxResult.Cancelled;
-            }
-
-            if (!credentials.Password.Equals(password))
-            {
-                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
-                messageBoxResult = await dialog.Result;
-                canceled = messageBoxResult.Cancelled;
-            }  *@
+            result.Message = string.Empty;
 
             if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
             {
+                result.Success = true;
+                result.ErrorOccurred = false;
+                result.StatusCode = 200;
+                result.BadPassWord = false;
+                result.BadUserName = false;
                 dialog = await DialogService.ShowSuccessAsync("Login Successful!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }
+            else
+            {
+                result.Success = false;
+                result.ErrorOccurred = false;
+                result.StatusCode = 401;
+
+                if (string.IsNullOrWhiteSpace(credentials.Username)
+                    || !credentials.Password.Equals(username))
+                {
+                    result.BadUserName = true;
+                }
+
+                if (string.IsNullOrWhiteSpace(credentials.Password)
+                    || !credentials.Password.Equals(password))
+                {
+                    result.BadPassWord = true;
+                }
+
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
                 messageBoxResult = await dialog.Result;
                 canceled = messageBoxResult.Cancelled;
             }
