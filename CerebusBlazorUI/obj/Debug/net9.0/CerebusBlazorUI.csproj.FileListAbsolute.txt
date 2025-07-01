@@ -96,3 +96,4 @@ D:\projects\djinntek\CerebusBlazorUI\CerebusBlazorUI\obj\Debug\net9.0\refint\Cer
 D:\projects\djinntek\CerebusBlazorUI\CerebusBlazorUI\obj\Debug\net9.0\CerebusBlazorUI.pdb
 D:\projects\djinntek\CerebusBlazorUI\CerebusBlazorUI\obj\Debug\net9.0\CerebusBlazorUI.genruntimeconfig.cache
 D:\projects\djinntek\CerebusBlazorUI\CerebusBlazorUI\obj\Debug\net9.0\ref\CerebusBlazorUI.dll
+D:\Projects\djinntek\CerebusBlazorUI\CerebusBlazorUI\obj\Debug\net9.0\CerebusBlazorUI.sourcelink.json

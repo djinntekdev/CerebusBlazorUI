@@ -1,20 +1,100 @@
 ﻿@page "/Login"
+@using CerebusBlazorUI.Classes.Login
+@inject IDialogService DialogService
+
+
 <h3>Login</h3>
 
 <div>
-    <FluentLabel> Username: </FluentLabel>
-    <FluentTextField @bind-Value=dUsername Maxlength="25" Autofocus="true" Required=true>
-        <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
-    </FluentTextField>
-    <FluentLabel> Password: </FluentLabel>
-    <FluentTextField @bind-Value=dPassword Maxlength="16" TextFieldType="TextFieldType.Password" >
-        <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
-    </FluentTextField>
-    <hr />
-    <FluentButton Appearance="Appearance.Accent">Login</FluentButton> <FluentButton>Clear</FluentButton>
+    <FluentGrid Spacing="1"  AdaptiveRendering="false" Justify="JustifyContent.Center">
+        <FluentGridItem lg="3" >
+            &nbsp;
+        </FluentGridItem>
+        <FluentGridItem lg="6"  >
+            <div class="card">
+                <FluentLabel> Username: </FluentLabel>
+                <FluentTextField @bind-Value=credentials.Username Maxlength="25" Autofocus="true" Required=true>
+                    <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
+                </FluentTextField>
+                <FluentLabel> Password: </FluentLabel>
+                <FluentTextField @bind-Value=credentials.Password Maxlength="16" TextFieldType="TextFieldType.Password" >
+                    <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
+                </FluentTextField>
+                <hr />
+                <FluentButton Appearance="Appearance.Accent" OnClick="@StartLogin">Login</FluentButton> <FluentButton>Clear</FluentButton>
+
+            </div>
+        </FluentGridItem>
+        <FluentGridItem lg="3">
+            &nbsp;
+        </FluentGridItem>
+    </FluentGrid>
+
 </div>
 
 @code {
-    string? dUsername;
-    string? dPassword;
+    LoginCredentials credentials = new LoginCredentials();
+
+
+
+    private async Task StartLogin() 
+    {
+        string username = "robert.reed";
+        string password = "password123"; 
+
+        LoginResult result = new LoginResult();
+        bool? canceled;
+        try
+        {
+            IDialogReference? dialog;
+            DialogResult? messageBoxResult;
+
+            if (string.IsNullOrWhiteSpace(credentials.Username)
+                || string.IsNullOrWhiteSpace(credentials.Password)
+                || !credentials.Username.Equals(username)
+                || !credentials.Password.Equals(password))
+            {
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }
+
+             @* if (string.IsNullOrWhiteSpace(credentials.Password))
+            {
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }
+
+            if (!credentials.Username.Equals(username))
+            {
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }
+
+            if (!credentials.Password.Equals(password))
+            {
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }  *@
+
+            if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
+            {
+                dialog = await DialogService.ShowSuccessAsync("Login Successful!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            }
+        }
+        catch (Exception ex)
+        {
+            result.Message = ex.Message;
+        }
+        finally
+        {
+
+        }
+    }
 }
+
