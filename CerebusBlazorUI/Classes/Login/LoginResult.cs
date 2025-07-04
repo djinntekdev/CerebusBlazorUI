@@ -3,6 +3,9 @@ using CerebusBlazorUI.Interfaces.Login;
 
 namespace CerebusBlazorUI.Classes.Login;
 
+/// <summary>
+/// Object storing the results of logging in
+/// </summary>
 public class LoginResult : ILoginResult
 {
     public string? UserName { get; set; }

@@ -1,9 +1,16 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using CerebusBlazorUI.Classes.RowModel;
 
 namespace CerebusBlazorUI.Classes.User;
 
-public class UserRole
+/// <summary>
+/// Class storing user role info and permissions
+/// </summary>
+public class UserRole : RowBase
 {
-    public int ID { get; set; }
+    [Required]
+    [StringLength(100)]
     public string Name { get; set; }
+    public bool IsAdmin { get; set; }
 }

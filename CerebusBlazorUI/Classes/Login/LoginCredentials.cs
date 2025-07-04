@@ -4,6 +4,9 @@ using CerebusBlazorUI.Interfaces.Login;
 
 namespace CerebusBlazorUI.Classes.Login;
 
+/// <summary>
+/// Object storing login credentials, password in plain text.  
+/// </summary>
 public class LoginCredentials : ILoginCredentials
 
 {

@@ -2,6 +2,9 @@ using System;
 
 namespace CerebusBlazorUI.Interfaces.Login;
 
+/// <summary>
+/// Interface for login results
+/// </summary>
 public interface ILoginResult
 {
     string? UserName { get; set; }

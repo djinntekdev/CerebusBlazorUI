@@ -1,11 +1,16 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using CerebusBlazorUI.Classes.RowModel;
 
 namespace CerebusBlazorUI.Classes.Places;
 
-public class USState
+/// <summary>
+/// List of US States
+/// </summary>
+public class USState : RowBase
 {
-    public int ID { get; set; }
+    [Required]
     public int Name { get; set; }
+    [Required]
     public int Abbreviation { get; set; }
-
 }
