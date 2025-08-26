@@ -1,5 +1,7 @@
 using Microsoft.FluentUI.AspNetCore.Components;
 using CerebusBlazorUI.Components;
+using CerebusBlazorUI.Utilities.Entity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
+builder.Services.AddDbContext<CerebusContext>(options =>
+    options.UseMySQL(""));
 
 var app = builder.Build();
 

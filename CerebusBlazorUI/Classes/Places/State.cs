@@ -9,8 +9,63 @@ namespace CerebusBlazorUI.Classes.Places;
 /// </summary>
 public class USState : RowBase
 {
+
     [Required]
-    public int Name { get; set; }
+    public required string Name { get; set; }
     [Required]
-    public int Abbreviation { get; set; }
+    public required string Abbreviation { get; set; }
+}
+
+public enum USStates
+{
+    AL = 1,
+    AK,
+    AZ,
+    AR,
+    CA,
+    CO,
+    CT,
+    DE,
+    FL,
+    GA,
+    HI,
+    ID,
+    IL,
+    IN,
+    IA,
+    KS,
+    KY,
+    LA,
+    ME,
+    MD,
+    MA,
+    MI,
+    MN,
+    MS,
+    MO,
+    MT,
+    NE,
+    NV,
+    NH,
+    NJ,
+    NM,
+    NY,
+    NC,
+    ND,
+    OH,
+    OK,
+    OR,
+    PA,
+    RI,
+    SC,
+    SD,
+    TN,
+    TX,
+    UT,
+    VT,
+    VA,
+    WA,
+    WV,
+    WI,
+    WY
 }

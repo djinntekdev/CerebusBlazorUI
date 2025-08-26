@@ -17,7 +17,7 @@ public static class Encryptor
 
     #region Password Hashing
 
-    public static byte[] HashPasswordV2(string password)
+    public static string HashPasswordV2(string password)
     {
         
         const KeyDerivationPrf Pbkdf2Prf = KeyDerivationPrf.HMACSHA1; // default for Rfc2898DeriveBytes
@@ -41,27 +41,31 @@ public static class Encryptor
         outputBytes[0] = 0x00; // format marker
         Buffer.BlockCopy(salt, 0, outputBytes, 1, SaltSize);
         Buffer.BlockCopy(subkey, 0, outputBytes, 1 + SaltSize, Pbkdf2SubkeyLength);
-        return outputBytes;
+
+        string hashedPassword = Convert.ToBase64String(outputBytes);
+        return hashedPassword;
     }
 
-    public static bool VerifyHashedPasswordV2(byte[] hashedPassword, string password)
+    public static bool VerifyHashedPasswordV2(string hashedPassword, string password)
     {
         const KeyDerivationPrf Pbkdf2Prf = KeyDerivationPrf.HMACSHA1; // default for Rfc2898DeriveBytes
         const int Pbkdf2IterCount = 1000; // default for Rfc2898DeriveBytes
         const int Pbkdf2SubkeyLength = 256 / 8; // 256 bits
         const int SaltSize = 128 / 8; // 128 bits
 
+        byte[] hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
+        
         // We know ahead of time the exact length of a valid hashed password payload.
-        if (hashedPassword.Length != 1 + SaltSize + Pbkdf2SubkeyLength)
+        if (hashedPasswordBytes.Length != 1 + SaltSize + Pbkdf2SubkeyLength)
         {
             return false; // bad size
         }
 
         byte[] salt = new byte[SaltSize];
-        Buffer.BlockCopy(hashedPassword, 1, salt, 0, salt.Length);
+        Buffer.BlockCopy(hashedPasswordBytes, 1, salt, 0, salt.Length);
 
         byte[] expectedSubkey = new byte[Pbkdf2SubkeyLength];
-        Buffer.BlockCopy(hashedPassword, 1 + salt.Length, expectedSubkey, 0, expectedSubkey.Length);
+        Buffer.BlockCopy(hashedPasswordBytes, 1 + salt.Length, expectedSubkey, 0, expectedSubkey.Length);
 
         // Hash the incoming password and verify it
         byte[] actualSubkey = KeyDerivation.Pbkdf2(password, salt, Pbkdf2Prf, Pbkdf2IterCount, Pbkdf2SubkeyLength);

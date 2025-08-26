@@ -1,0 +1,127 @@
+﻿@page "/Users/Search"
+@using CerebusBlazorUI.Classes.User
+@using CerebusBlazorUI.Utilities.Entity
+@using Microsoft.VisualBasic
+@inject CerebusContext context
+<h3>UserSearch</h3>
+
+<FluentCard  >
+    <EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
+        <DataAnnotationsValidator />
+        <FluentValidationSummary />
+
+        <FluentGrid  AdaptiveRendering="true">
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentTextField @bind-Value=user.FirstName Label="First Name"></FluentTextField>
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentTextField @bind-Value=user.LastName Label="Last Name"></FluentTextField>
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentDatePicker Label="Hire Date From:" @bind-Value=@hireDateStart  />
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentDatePicker Label="Hire Date To:" @bind-Value=@hireDateEnd  />
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                <div>
+                    <FluentCheckbox @bind-Value="@user.IsActive" Label="Include Inactive Users" />
+                </div>
+            </FluentGridItem>  
+            <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                <div>
+                    <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                </div>
+            </FluentGridItem>         
+        </FluentGrid>
+
+    </EditForm>
+</FluentCard>
+@* <br/> *@
+<FluentDivider Style="width: 100%;" Orientation=Orientation.Horizontal Role="DividerRole.Separator"></FluentDivider>
+@* <br/> *@
+<FluentCard  >
+    <FluentLabel Typo="Typography.H3">Results</FluentLabel>
+
+    <div style="display: table; table-layout: fixed; width: 100%;">
+        <div style="overflow-x: auto;">
+            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;">
+                <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
+                <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
+                <PropertyColumn Property="@(u => u.PhoneNumber)" Sortable="true" Title="Phone #" />
+                <PropertyColumn Property="@(u => u.EmailAddress)" Sortable="true" Title="Email" />
+                <PropertyColumn Property="@(u => u.Title)" Sortable="true" Title="Job Title" />
+                <PropertyColumn Property="@(u => u.HireDate)" Sortable="true" Title="Hire Date" />
+                @* <PropertyColumn Property="@(u => u.StreetAddress)" Sortable="true" Title="Address" /> *@
+                <PropertyColumn Property="@(u => u.City)" Sortable="true" Title="City" />
+                <PropertyColumn Property="@(u => u.State)" Sortable="true"  Title="State" />
+                @* <PropertyColumn Property="@(u => u.ZipCode)" Sortable="true" Title="Zip" /> *@
+                <PropertyColumn Property="@(u => u.CreatedDate)" Sortable="true"  Title="Created On"/>
+                <PropertyColumn Property="@(u => u.UpdatedDate)" Sortable="true" Title="Updated On" />
+                <TemplateColumn Title="View">
+                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => ViewRecord(context))">View User</FluentButton>
+                </TemplateColumn>
+            </FluentDataGrid>
+        </div>
+    </div>
+
+
+</FluentCard>
+
+
+
+
+@code {
+
+    User user = new User();
+
+    DateTime? hireDateStart;
+    DateTime? hireDateEnd;
+    IQueryable<User> Users = new List<User>().AsQueryable();
+          
+    PaginationState pagination = new PaginationState() { ItemsPerPage = 10 };
+
+    void ViewRecord(User u) 
+    {
+        //TODO: Navigate to User Detail Page
+    }
+
+    public void HandleValidSubmit()
+    {
+        
+        try
+        {
+            var usersQuery = context.Users.Where(u => true);
+
+            if (!string.IsNullOrWhiteSpace(user.FirstName))
+            {
+                usersQuery = usersQuery.Where(u => u.FirstName == user.FirstName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.LastName))
+            {
+                usersQuery = usersQuery.Where(u => u.LastName == user.LastName);
+            }
+
+            if (!user.IsActive)
+            {
+                usersQuery = usersQuery.Where(u => u.IsActive == true);
+            }
+
+            Users = usersQuery.ToList().AsQueryable();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+}

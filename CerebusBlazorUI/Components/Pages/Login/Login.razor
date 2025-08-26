@@ -1,6 +1,11 @@
 ﻿@page "/Login"
 @using CerebusBlazorUI.Classes.Login
+@using CerebusBlazorUI.Utilities
+@using CerebusBlazorUI.Utilities.Entity
+@using CerebusBlazorUI.Classes.User;
 @inject IDialogService DialogService
+@inject CerebusContext context
+
 
 
 <h3>Login</h3>
@@ -13,13 +18,14 @@
         <FluentGridItem lg="6"  >
             <div class="card">
                 <FluentLabel> Username: </FluentLabel>
-                <FluentTextField Value="@credentials.Username" ValueChanged="@((string newValue) => OnUsernameChanged(newValue))" Maxlength="25" Autofocus="true" Required="true" >
+                <FluentTextField Value="@credentials.Username"  ValueChanged="@((string newValue) => OnUsernameChanged(newValue))" Maxlength="25" Autofocus="true" Required="true" >
                     <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
                 </FluentTextField>
                 <FluentLabel> Password: </FluentLabel>
                 <FluentTextField Value="@credentials.Password" ValueChanged="@((string newValue) => OnPasswordChanged(newValue))" Maxlength="16" TextFieldType="TextFieldType.Password" Required="true">
                     <FluentIcon Value="@(new Icons.Regular.Size16.Key())" Slot="start" Color="Color.Neutral" />
                 </FluentTextField>
+                <FluentLabel Typo="Typography.H5" Style="color:red;"></FluentLabel>
                 <hr />
                 <FluentButton Appearance="Appearance.Accent" OnClick="@StartLogin" Disabled=@buttonsDisabled>Login</FluentButton> <FluentButton Disabled=@buttonsDisabled>Clear</FluentButton>
 
@@ -35,6 +41,10 @@
 @code {
     LoginCredentials credentials = new LoginCredentials();
     bool buttonsDisabled = true; 
+    string loginMessage = "Error!";
+    // Style="border-style: solid; border-color: red;"
+
+     
 
     void OnUsernameChanged(string newValue)
     {
@@ -87,19 +97,41 @@ void OnPasswordChanged(string newValue)
 
     private async Task StartLogin() 
     {
-        string username = "robert.reed";
-        string password = "password123"; 
-
+        //string credentials.U = "robert.reed";
         LoginResult result = new LoginResult();
-        bool? canceled;
+        IDialogReference? dialog;
+        DialogResult? messageBoxResult;
+ 
+#line default
+
         try
         {
-            IDialogReference? dialog;
-            DialogResult? messageBoxResult;
+
+            string password = Encryptor.HashPasswordV2(credentials.Password.Trim());
+
+            User user = context.Users
+                .Where(u => u.Username == credentials.Username.Trim() 
+                    && u.Password == password 
+                    && u.IsActive)
+                .SingleOrDefault();
+            
+            if (user is null)
+            {
+                //Raise error, user not found.
+                return;
+            }
+            
+            @* if (string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password))
+            {
+                dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+                messageBoxResult = await dialog.Result;
+                canceled = messageBoxResult.Cancelled;
+            } *@
+
 
             result.Message = string.Empty;
 
-            if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
+            @* if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
             {
                 result.Success = true;
                 result.ErrorOccurred = false;
@@ -131,7 +163,7 @@ void OnPasswordChanged(string newValue)
                 dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
                 messageBoxResult = await dialog.Result;
                 canceled = messageBoxResult.Cancelled;
-            }
+            } *@
         }
         catch (Exception ex)
         {
