@@ -46,10 +46,24 @@ public class User : RowBase
     //public User Manager { get; set; }
     //public int ManagerID { get; set; }
     //public bool isManager { get; set; }
-    public DateTime TerminationDate { get; set; }
+    public DateTime? TerminationDate { get; set; }
 
 
     #endregion
 
+}
 
+public class UserModel
+{
+    public string? FirstName { get; set; }
+    public string? MiddleNameOrInitial { get; set; }
+    public string? LastName { get; set; }
+    public string? EmailAddress { get; set; }
+    public string? PhoneNumber { get; set; }
+    public string? StreetAddress { get; set; }
+    public string? City { get; set; }
+    public string? State { get; set; }
+    public string? ZipCode { get; set; }
+    public string? Title { get; set; }
+    public DateTime HireDate { get; set; }
 }

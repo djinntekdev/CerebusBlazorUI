@@ -1,0 +1,223 @@
+﻿@page "/Users/Detail/{formModeParameter}"
+@page "/Users/Detail/{formModeParameter}/{id:int}" 
+@using CerebusBlazorUI.Utilities
+@using CerebusBlazorUI.Utilities.Enums
+@using CerebusBlazorUI.Classes.User
+@using CerebusBlazorUI.Utilities.Entity
+@using Microsoft.VisualBasic
+@using System.Diagnostics
+@inject CerebusContext context
+<h3>UserDetail</h3>
+
+<FluentCard>
+<EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_detail" novalidate>
+        <DataAnnotationsValidator />
+        <FluentValidationSummary />
+
+        <FluentGrid  AdaptiveRendering="true">
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>  
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.MiddleNameOrInitial Label="Middle" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>
+
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.PhoneNumber Label="Phone" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>  
+            <FluentGridItem lg="8" md="8" sm="8" xl="8">
+                <div>
+                    <FluentTextField @bind-Value=userModel.EmailAddress Label="Email" ReadOnly="@isReadOnly" style="width: 100%;"></FluentTextField>
+                </div>
+            </FluentGridItem>  
+
+            <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                <div>
+                    <FluentTextField @bind-Value=userModel.StreetAddress Label="Street Address" ReadOnly="@isReadOnly" style="width: 100%;"></FluentTextField>
+                </div>
+            </FluentGridItem>  
+
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.City Label="City" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>   
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.State Label="State" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>  
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentTextField @bind-Value=userModel.ZipCode Label="Zip" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>
+
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentTextField @bind-Value=userModel.Title Label="Job Title" ReadOnly="@isReadOnly"></FluentTextField>
+                </div>
+            </FluentGridItem>
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentDatePicker Label="Hire Date" ReadOnly="@isReadOnly" @bind-Value=hireDate />
+                </div>
+            </FluentGridItem>
+
+            <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                <div>
+                    <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                </div>
+            </FluentGridItem>         
+        </FluentGrid>
+
+    </EditForm>
+</FluentCard>
+
+@code {
+    DetailFormMode formMode;
+    //User user = new User();
+    DateTime? hireDate;
+    UserModel userModel = new UserModel(); 
+
+    [Parameter]  
+    public int? ID { get; set; } 
+
+    [Parameter]
+    public required string formModeParameter { get; set; } 
+
+    bool isReadOnly; 
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    
+    }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+ 
+        ID = ID ?? -1;
+    
+        if (string.IsNullOrWhiteSpace(formModeParameter))
+        {
+            //TODO: throw exception, show 404
+        }
+        else if (formModeParameter.ToLower() == "view")
+        {
+            formMode = DetailFormMode.View;
+            isReadOnly = true;
+        }
+        else if (formModeParameter.ToLower() == "add")
+        {
+            formMode = DetailFormMode.Add;
+            isReadOnly = false;
+        }
+        else if (formModeParameter.ToLower() == "edit")
+        {
+            formMode = DetailFormMode.Edit;
+            isReadOnly = false;
+        }
+        else
+        {
+            //TODO: throw exception, show 404
+        } 
+    }
+
+    public void HandleValidSubmit()
+    {
+        try
+        {
+            if (formMode == DetailFormMode.Add)
+            {
+                User user = new User();
+
+                if (!string.IsNullOrWhiteSpace(userModel.FirstName))
+                {
+                    user.FirstName = userModel.FirstName;
+                }
+                
+                if (!string.IsNullOrWhiteSpace(userModel.LastName))
+                {
+                    user.LastName = userModel.LastName;
+                }
+
+                if (!string.IsNullOrWhiteSpace(userModel.MiddleNameOrInitial))
+                {
+                    user.MiddleNameOrInitial = userModel.MiddleNameOrInitial;
+                }          
+
+                if (!string.IsNullOrWhiteSpace(userModel.EmailAddress))
+                {
+                    user.EmailAddress = userModel.EmailAddress;
+                }     
+
+                if (!string.IsNullOrWhiteSpace(userModel.PhoneNumber))
+                {
+                    user.PhoneNumber = userModel.PhoneNumber;
+                }  
+
+                if (!string.IsNullOrWhiteSpace(userModel.StreetAddress))
+                {
+                    user.StreetAddress = userModel.StreetAddress;
+                }  
+
+                if (!string.IsNullOrWhiteSpace(userModel.City))
+                {
+                    user.City = userModel.City;
+                }  
+
+                if (!string.IsNullOrWhiteSpace(userModel.State))
+                {
+                    user.State = userModel.State;
+                }  
+
+                if (!string.IsNullOrWhiteSpace(userModel.ZipCode))
+                {
+                    user.ZipCode = userModel.ZipCode;
+                }  
+
+                if (!string.IsNullOrWhiteSpace(userModel.Title))
+                {
+                    user.Title = userModel.Title;
+                }  
+
+                if (hireDate.HasValue)
+                {
+                    user.HireDate = hireDate.Value;
+                }  
+
+                user.CreatedDate = DateTime.UtcNow;
+                user.TerminationDate = DateTime.MinValue;
+                user.UpdatedDate = DateTime.MinValue;
+                user.CreatedBy = "admin";
+                user.UpdatedBy = "admin";
+                user.IsActive = true;
+                user.IsDeleted = false;
+                user.Username = String.Concat(user.FirstName,".",user.LastName);
+                user.Password = Encryptor.HashPasswordV2("GoCerebus99");
+
+                var x = context.Users.Add(user);
+                Debug.WriteLine(x.ToString());
+                context.SaveChanges();
+                
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+}

@@ -1,10 +1,19 @@
 ﻿@page "/Users/Search"
+
 @using CerebusBlazorUI.Classes.User
 @using CerebusBlazorUI.Utilities.Entity
 @using Microsoft.VisualBasic
 @inject CerebusContext context
-<h3>UserSearch</h3>
+@inject NavigationManager Navigator
+@inject IDialogService DialogService
 
+
+<h3>UserSearch</h3>
+<br/>
+<FluentButton Appearance="Appearance.Accent" BackgroundColor="Green" Style="margin: 5px;" OnClick="@AddNewUser">
+    Add New User
+</FluentButton>
+<br />
 <FluentCard  >
     <EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
         <DataAnnotationsValidator />
@@ -53,7 +62,7 @@
 
     <div style="display: table; table-layout: fixed; width: 100%;">
         <div style="overflow-x: auto;">
-            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;">
+            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@(() => TestRecord(user))" TGridItem="User">
                 <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
                 <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
                 <PropertyColumn Property="@(u => u.PhoneNumber)" Sortable="true" Title="Phone #" />
@@ -82,18 +91,32 @@
 @code {
 
     User user = new User();
-
     DateTime? hireDateStart;
     DateTime? hireDateEnd;
     IQueryable<User> Users = new List<User>().AsQueryable();
-          
     PaginationState pagination = new PaginationState() { ItemsPerPage = 10 };
 
     void ViewRecord(User u) 
     {
-        //TODO: Navigate to User Detail Page
+        //TODO: Create the User Detail Page
+        //Navigation.NavigateTo($"users/detail/{u.ID}");
+
     }
 
+    private async Task TestRecord(User u)
+    {
+        IDialogReference? dialog;
+        DialogResult? messageBoxResult;
+        bool canceled;
+        dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
+        messageBoxResult = await dialog.Result;
+        canceled = messageBoxResult.Cancelled;
+    }
+
+    public void AddNewUser()
+    {
+        Navigator.NavigateTo("/Users/Detail/Add");
+    }
     public void HandleValidSubmit()
     {
         
