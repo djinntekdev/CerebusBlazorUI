@@ -119,6 +119,26 @@
         {
             formMode = DetailFormMode.View;
             isReadOnly = true;
+
+            if (ID.HasValue)
+            {
+                User u = context.Users.Where(u => u.ID == ID.Value).FirstOrDefault();
+
+                if (u is not null)
+                {
+                    userModel.FirstName = u.FirstName;
+                    userModel.LastName = u.LastName;
+                    userModel.MiddleNameOrInitial = u.MiddleNameOrInitial;
+                    userModel.PhoneNumber = u.PhoneNumber;
+                    userModel.EmailAddress = u.EmailAddress;
+                    userModel.StreetAddress = u.StreetAddress;
+                    userModel.City = u.City;
+                    userModel.State = u.State;
+                    userModel.ZipCode = u.ZipCode;
+                    userModel.Title = u.Title;
+                    userModel.HireDate = u.HireDate;
+                }
+            }
         }
         else if (formModeParameter.ToLower() == "add")
         {

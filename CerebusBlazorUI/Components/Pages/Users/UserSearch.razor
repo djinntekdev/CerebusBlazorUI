@@ -15,19 +15,19 @@
 </FluentButton>
 <br />
 <FluentCard  >
-    <EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
+    <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
         <DataAnnotationsValidator />
         <FluentValidationSummary />
 
         <FluentGrid  AdaptiveRendering="true">
             <FluentGridItem lg="6" md="6" sm="6" xl="6">
                 <div>
-                    <FluentTextField @bind-Value=user.FirstName Label="First Name"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name"></FluentTextField>
                 </div>
             </FluentGridItem>   
             <FluentGridItem lg="6" md="6" sm="6" xl="6">
                 <div>
-                    <FluentTextField @bind-Value=user.LastName Label="Last Name"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name"></FluentTextField>
                 </div>
             </FluentGridItem>   
             <FluentGridItem lg="6" md="6" sm="6" xl="6">
@@ -42,7 +42,7 @@
             </FluentGridItem>   
             <FluentGridItem lg="12" md="12" sm="12" xl="12">
                 <div>
-                    <FluentCheckbox @bind-Value="@user.IsActive" Label="Include Inactive Users" />
+                    <FluentCheckbox @bind-Value="@isActive" Label="Include Inactive Users" />
                 </div>
             </FluentGridItem>  
             <FluentGridItem lg="12" md="12" sm="12" xl="12">
@@ -62,7 +62,7 @@
 
     <div style="display: table; table-layout: fixed; width: 100%;">
         <div style="overflow-x: auto;">
-            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@(() => TestRecord(user))" TGridItem="User">
+            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@(() => TestRecord(user))" TGridItem="User" AutoFit="true">
                 <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
                 <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
                 <PropertyColumn Property="@(u => u.PhoneNumber)" Sortable="true" Title="Phone #" />
@@ -91,6 +91,8 @@
 @code {
 
     User user = new User();
+    bool isActive;
+    UserModel userModel = new UserModel();
     DateTime? hireDateStart;
     DateTime? hireDateEnd;
     IQueryable<User> Users = new List<User>().AsQueryable();
@@ -99,7 +101,7 @@
     void ViewRecord(User u) 
     {
         //TODO: Create the User Detail Page
-        //Navigation.NavigateTo($"users/detail/{u.ID}");
+        Navigator.NavigateTo($"users/detail/view/{u.ID}");
 
     }
 
@@ -124,17 +126,17 @@
         {
             var usersQuery = context.Users.Where(u => true);
 
-            if (!string.IsNullOrWhiteSpace(user.FirstName))
+            if (!string.IsNullOrWhiteSpace(userModel.FirstName))
             {
-                usersQuery = usersQuery.Where(u => u.FirstName == user.FirstName);
+                usersQuery = usersQuery.Where(u => u.FirstName == userModel.FirstName);
             }
 
-            if (!string.IsNullOrWhiteSpace(user.LastName))
+            if (!string.IsNullOrWhiteSpace(userModel.LastName))
             {
-                usersQuery = usersQuery.Where(u => u.LastName == user.LastName);
+                usersQuery = usersQuery.Where(u => u.LastName == userModel.LastName);
             }
 
-            if (!user.IsActive)
+            if (!isActive)
             {
                 usersQuery = usersQuery.Where(u => u.IsActive == true);
             }
