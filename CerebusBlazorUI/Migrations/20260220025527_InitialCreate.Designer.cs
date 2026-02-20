@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CerebusBlazorUI.Migrations
 {
     [DbContext(typeof(CerebusContext))]
-    [Migration("20260219220958_InitialCreateAgain")]
-    partial class InitialCreateAgain
+    [Migration("20260220025527_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,45 @@ namespace CerebusBlazorUI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("CerebusBlazorUI.Classes.Places.USState", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("USStates");
+                });
 
             modelBuilder.Entity("CerebusBlazorUI.Classes.User.User", b =>
                 {
@@ -130,7 +169,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Reed",
                             MiddleNameOrInitial = "L",
-                            Password = "AGdJ7cEMf/eMJjFLE6gA7Y3s5hLAcQM1HlJPuBCfRtON2h3FX8kXAwSIMKe2i/BsCg==",
+                            Password = "AHDy/36nvmOIZZ+86saNDDFVoWZqPdMNLScwq3GykJc7AdtNYTTHXzchpD1KiIYQCQ==",
                             PhoneNumber = "646-555-3047",
                             State = "32",
                             StreetAddress = "814 Geraldine Lane",
@@ -153,7 +192,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Carter",
                             MiddleNameOrInitial = "N",
-                            Password = "AIZxZbZ4vykUJqPVDHsrlnEx9F2/D9fF6f7iWSfizxo+rLuAroeE1c75WCGpdvcYNA==",
+                            Password = "ANAQW4iT7s3qS+WVncAjgo2la5Zl6EzwzRq2+SSITTQ0nUfilTUofxltn3FDAvoS2w==",
                             PhoneNumber = "716-555-3630",
                             State = "32",
                             StreetAddress = "2034 Jarvis Street",
@@ -176,7 +215,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Boyer",
                             MiddleNameOrInitial = "O",
-                            Password = "ALx8TAQU7FISU230Hx9lvVEtE7z9nk2D4x+Zv4bKYyo292Cba/peN0AFWEt6EI+ZyA==",
+                            Password = "AFI2Nd6dJGY0lKl0gJiBstFZBaUcxaubVUYRtwKKARvO1jfOpNLgHXm6C4qupJE1RA==",
                             PhoneNumber = "508-555-2320",
                             State = "21",
                             StreetAddress = "3821 Randolph Street",
@@ -199,7 +238,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "William",
                             MiddleNameOrInitial = "E",
-                            Password = "AMmtwHAzQ64Rk3d2ylZqvD08BPPYdt8Pl8RNHarqbfrlPK1jlQeRyf03QBvGsPOi9w==",
+                            Password = "AFo2tWOviyiD7tNSlTU6UNvyrUd6TZ2M5ukl09kV9ZQlr+u5Es8SQSsrw/U1Qr045w==",
                             PhoneNumber = "212-555-3480",
                             State = "32",
                             StreetAddress = "35 Godfrey Road",
@@ -222,7 +261,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Cross",
                             MiddleNameOrInitial = "U",
-                            Password = "AKVsSTrqrpT4qtYkPE5m5CAnDHV++M9IvnPiWti5fqNeW7K8ELuLcRYhsSiVZ8QGCQ==",
+                            Password = "ABuDZTAUpBfjClDnBbuTqsO2Ohw3wZnl6eY2Uhk8Ftxgb1PnxEBj2C+27yaFhDYIYQ==",
                             PhoneNumber = "860-555-0200",
                             State = "7",
                             StreetAddress = "459 Hart Street",
@@ -245,7 +284,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Ryan",
                             MiddleNameOrInitial = "M",
-                            Password = "AOXjkLu2vAYgT4p7S5z0K9NxPRNVor6X9rIcgiBOgCB61IIoQizXkHhU2Ub7oerVfA==",
+                            Password = "ABtVwICrTLu8knP/WNfm7usNsC7VExgFjDM6ojcDf0/hOzg+mDF5m8d9tXebXdeedg==",
                             PhoneNumber = "518-555-2034",
                             State = "32",
                             StreetAddress = "3564 Hardesty Street",
@@ -268,7 +307,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Dawson",
                             MiddleNameOrInitial = "R",
-                            Password = "ABdrcyVjZIOoS6PXfbSo6AofSbXtSyrOsXZ5flf2KyqrytPF7WSllwgfTwzT5f2IKQ==",
+                            Password = "ADQ9bxzIYuZeQLSJ5x69PiEYOoIsAOAC8sUM0tMj6eY3BVRE3VTNhzXfFto1mZT1kA==",
                             PhoneNumber = "207-555-2113",
                             State = "19",
                             StreetAddress = "262 Victoria Court",
@@ -291,7 +330,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Hartman",
                             MiddleNameOrInitial = "A",
-                            Password = "AEDH5LgFllFE37M6eCgGRWPi5UgkNALjjSWLOnBCYSh/7Ti2xWsZNa/yLOU0vUUG6w==",
+                            Password = "APtnb0sr2RybmObY29ntYRk2frFJPhuyySDWoPeuu/Mgu7SzaFvW/cgs5rrGC0T9PQ==",
                             PhoneNumber = "814-555-1968",
                             State = "38",
                             StreetAddress = "2797 Coal Street",
@@ -314,7 +353,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "James",
                             MiddleNameOrInitial = "W",
-                            Password = "AD7hgMHfg6Elmt9dyWFYtNfz92WMeUKVKmL5uiwmwXk22m7oK33Wc6mK0ipX5aVfJQ==",
+                            Password = "ADVBZqOGXLWjgWiQWJR0ZRWnae4cjVGUw4gjiUs+e95eHHplxfQpohqBPZflleZjLw==",
                             PhoneNumber = "908-555-4192",
                             State = "30",
                             StreetAddress = "1198 Hedge Street",
@@ -337,7 +376,7 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Harmon",
                             MiddleNameOrInitial = "T",
-                            Password = "AOswojxYsUlH2i5O36r2czDDFvRpC2EQk+hjHI4nbQVyj6Aa0Ou3GM+92Tum6nR9Kw==",
+                            Password = "AKy6UXrnR3wdQ5PqaRb+i8HjNdFAragkOvsiARH436549gWB+buaIrv5H9dW1ymgiQ==",
                             PhoneNumber = "315-555-7346",
                             State = "32",
                             StreetAddress = "1698 Saint Marys Avenue",

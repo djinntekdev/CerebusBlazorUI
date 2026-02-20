@@ -16,7 +16,7 @@ public class USState : RowBase
     public required string Abbreviation { get; set; }
 }
 
-public enum USStates
+public enum USStatesEnum
 {
     AL = 1,
     AK,
@@ -67,5 +67,7 @@ public enum USStates
     WA,
     WV,
     WI,
-    WY
+    WY,
+    DC,
+    PR
 }

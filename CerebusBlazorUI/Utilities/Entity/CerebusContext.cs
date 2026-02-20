@@ -1,4 +1,5 @@
 using System;
+using CerebusBlazorUI.Classes.Places;
 using CerebusBlazorUI.Classes.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ public class CerebusContext : DbContext
     : base(options)
 { }
     public DbSet<User> Users { get; set; }
-
+    public DbSet<USState> USStates { get; set; }
     //public DbSet<Publisher> Publisher { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -10,8 +10,7 @@ namespace CerebusBlazorUI.Classes.RowModel;
 public class RowBase : IIdentityKey, IAuditColumns, IIsActive, IIsDeleted
 {
     [Key]
-    [Required]
-    public int ID { get; set; }
+    public int ID { get; set; } 
     [Required]
     public string CreatedBy { get; set; }
     [Required]

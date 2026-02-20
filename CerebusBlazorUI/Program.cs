@@ -10,7 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddDbContext<CerebusContext>(options =>
-    options.UseMySQL("Server=localhost; User ID=bob.reed; Password=!#AdminPwd10; Database=dbo"));
+    options.UseMySQL("Server=localhost; User ID=bobreed; Password=!#AdminPwd10; Database=cerebus"));
 
 var app = builder.Build();
 

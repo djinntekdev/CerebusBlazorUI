@@ -73,7 +73,7 @@
 
     <div style="display: table; table-layout: fixed; width: 100%;">
         <div style="overflow-x: auto;">
-            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@DoubleClickRecord" TGridItem="User" AutoFit="true">
+            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@DoubleClickRecord" TGridItem="User" AutoFit="true" ResizableColumns="true">
                 <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
                 <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
                 <TemplateColumn Title="View">
@@ -116,7 +116,7 @@
     {
         Navigator.NavigateTo($"users/detail/view/{u.ID}");
     }
-    
+
     void EditRecord(User u)
     {
         Navigator.NavigateTo($"users/detail/edit/{u.ID}");
@@ -144,9 +144,10 @@
 
     public void HandleValidSubmit()
     {
-        
+
         try
         {
+            //var x = context.Users;
             var usersQuery = context.Users.Where(u => true);
 
             if (!string.IsNullOrWhiteSpace(userModel.FirstName))
