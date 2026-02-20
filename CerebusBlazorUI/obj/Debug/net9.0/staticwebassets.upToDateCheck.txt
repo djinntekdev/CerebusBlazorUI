@@ -1,0 +1,4 @@
+wwwroot\app.css
+wwwroot\favicon.ico
+C:\Users\Bob\source\repos\djinntekdev\CerebusBlazorUI\CerebusBlazorUI\wwwroot\app.css
+C:\Users\Bob\source\repos\djinntekdev\CerebusBlazorUI\CerebusBlazorUI\wwwroot\favicon.ico

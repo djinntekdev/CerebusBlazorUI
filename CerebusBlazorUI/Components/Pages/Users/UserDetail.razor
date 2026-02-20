@@ -7,79 +7,108 @@
 @using Microsoft.VisualBasic
 @using System.Diagnostics
 @inject CerebusContext context
-<h3>UserDetail</h3>
+@inject NavigationManager Navigator
 
+<h3>@heading</h3>
+
+@if (formMode == DetailFormMode.View)
+{
+    <FluentButton Appearance="Appearance.Accent" BackgroundColor="Green" Style="margin: 5px;" OnClick="@SetEditMode">
+        Edit User
+    </FluentButton>
+}
+
+<FluentButton Appearance="Appearance.Accent" BackgroundColor="Green" Style="margin: 5px;" OnClick="@ReturnToSearch">
+    Return to Search
+</FluentButton>
+<br />
+
+<br />
 <FluentCard>
-<EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_detail" novalidate>
+    <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_detail" novalidate>
         <DataAnnotationsValidator />
         <FluentValidationSummary />
 
         <FluentGrid  AdaptiveRendering="true">
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>   
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>  
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.MiddleNameOrInitial Label="Middle" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.MiddleNameOrInitial Label="Middle" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>
 
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.PhoneNumber Label="Phone" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.PhoneNumber Label="Phone" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>  
             <FluentGridItem lg="8" md="8" sm="8" xl="8">
                 <div>
-                    <FluentTextField @bind-Value=userModel.EmailAddress Label="Email" ReadOnly="@isReadOnly" style="width: 100%;"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.EmailAddress Label="Email" ReadOnly="@isReadOnly" style="width: 100%;" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>  
 
             <FluentGridItem lg="12" md="12" sm="12" xl="12">
                 <div>
-                    <FluentTextField @bind-Value=userModel.StreetAddress Label="Street Address" ReadOnly="@isReadOnly" style="width: 100%;"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.StreetAddress Label="Street Address" ReadOnly="@isReadOnly" style="width: 100%;" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>  
 
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.City Label="City" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.City Label="City" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>   
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.State Label="State" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.State Label="State" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>  
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.ZipCode Label="Zip" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.ZipCode Label="Zip" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>
 
             <FluentGridItem lg="6" md="6" sm="6" xl="6">
                 <div>
-                    <FluentTextField @bind-Value=userModel.Title Label="Job Title" ReadOnly="@isReadOnly"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.Title Label="Job Title" ReadOnly="@isReadOnly" Appearance="@isShaded"></FluentTextField>
                 </div>
             </FluentGridItem>
             <FluentGridItem lg="6" md="6" sm="6" xl="6">
                 <div>
-                    <FluentDatePicker Label="Hire Date" ReadOnly="@isReadOnly" @bind-Value=hireDate />
+                    <FluentDatePicker Label="Hire Date" ReadOnly="@isReadOnly" @bind-Value=hireDate Appearance="@isShaded" />
                 </div>
             </FluentGridItem>
+            @if (formMode == DetailFormMode.Add)
+            {
+                <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                    <div>
+                        <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Save</FluentButton>
+                        <FluentButton OnClick="@ReturnToSearch">Cancel</FluentButton>
+                    </div>
+                </FluentGridItem>
+            }
+            else if (formMode == DetailFormMode.Edit)
+            {
+                <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                    <div>
+                        <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Save</FluentButton>
+                        <FluentButton OnClick="@SetViewMode">Cancel</FluentButton>
+                    </div>
+                </FluentGridItem>
 
-            <FluentGridItem lg="12" md="12" sm="12" xl="12">
-                <div>
-                    <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
-                </div>
-            </FluentGridItem>         
+            }
+
         </FluentGrid>
 
     </EditForm>
@@ -87,9 +116,10 @@
 
 @code {
     DetailFormMode formMode;
-    //User user = new User();
+    User user = new User();
     DateTime? hireDate;
     UserModel userModel = new UserModel(); 
+    string heading; 
 
     [Parameter]  
     public int? ID { get; set; } 
@@ -97,20 +127,36 @@
     [Parameter]
     public required string formModeParameter { get; set; } 
 
-    bool isReadOnly; 
+    bool isReadOnly;
+    FluentInputAppearance isShaded;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-    
+
+    }
+
+    public void SetEditMode()
+    {
+        Navigator.NavigateTo($"users/detail/edit/{user.ID}");
+    }
+
+    public void SetViewMode()
+    {
+        Navigator.NavigateTo($"users/detail/view/{user.ID}");
+    }
+
+    public void ReturnToSearch()
+    {
+        Navigator.NavigateTo($"/users/search");
     }
 
     public async override Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
- 
+
         ID = ID ?? -1;
-    
+
         if (string.IsNullOrWhiteSpace(formModeParameter))
         {
             //TODO: throw exception, show 404
@@ -122,41 +168,75 @@
 
             if (ID.HasValue)
             {
-                User u = context.Users.Where(u => u.ID == ID.Value).FirstOrDefault();
+                user = context.Users.Where(u => u.ID == ID.Value).FirstOrDefault();
 
-                if (u is not null)
+                if (user is not null)
                 {
-                    userModel.FirstName = u.FirstName;
-                    userModel.LastName = u.LastName;
-                    userModel.MiddleNameOrInitial = u.MiddleNameOrInitial;
-                    userModel.PhoneNumber = u.PhoneNumber;
-                    userModel.EmailAddress = u.EmailAddress;
-                    userModel.StreetAddress = u.StreetAddress;
-                    userModel.City = u.City;
-                    userModel.State = u.State;
-                    userModel.ZipCode = u.ZipCode;
-                    userModel.Title = u.Title;
-                    userModel.HireDate = u.HireDate;
+                    userModel.FirstName = user.FirstName;
+                    userModel.LastName = user.LastName;
+                    userModel.MiddleNameOrInitial = user.MiddleNameOrInitial;
+                    userModel.PhoneNumber = user.PhoneNumber;
+                    userModel.EmailAddress = user.EmailAddress;
+                    userModel.StreetAddress = user.StreetAddress;
+                    userModel.City = user.City;
+                    userModel.State = user.State;
+                    userModel.ZipCode = user.ZipCode;
+                    userModel.Title = user.Title;
+                    userModel.HireDate = user.HireDate;
                 }
             }
+
+            heading = $"User Detail for {user.FirstName} {user.LastName}";
         }
         else if (formModeParameter.ToLower() == "add")
         {
             formMode = DetailFormMode.Add;
             isReadOnly = false;
+            heading = $"Add New User";
         }
         else if (formModeParameter.ToLower() == "edit")
         {
             formMode = DetailFormMode.Edit;
             isReadOnly = false;
+
+            if (ID.HasValue)
+            {
+                user = context.Users.Where(u => u.ID == ID.Value).FirstOrDefault();
+
+                if (user is not null)
+                {
+                    userModel.FirstName = user.FirstName;
+                    userModel.LastName = user.LastName;
+                    userModel.MiddleNameOrInitial = user.MiddleNameOrInitial;
+                    userModel.PhoneNumber = user.PhoneNumber;
+                    userModel.EmailAddress = user.EmailAddress;
+                    userModel.StreetAddress = user.StreetAddress;
+                    userModel.City = user.City;
+                    userModel.State = user.State;
+                    userModel.ZipCode = user.ZipCode;
+                    userModel.Title = user.Title;
+                    userModel.HireDate = user.HireDate;
+                }
+            }
+            heading = $"Editing User {user.FirstName} {user.LastName}";
+
         }
         else
         {
             //TODO: throw exception, show 404
         } 
+
+        if (isReadOnly)
+        {
+            isShaded = FluentInputAppearance.Filled;
+        }
+        else
+        {
+            isShaded = FluentInputAppearance.Outline;
+        }
     }
 
-    public void HandleValidSubmit()
+    public async Task HandleValidSubmit()
     {
         try
         {
@@ -168,7 +248,7 @@
                 {
                     user.FirstName = userModel.FirstName;
                 }
-                
+
                 if (!string.IsNullOrWhiteSpace(userModel.LastName))
                 {
                     user.LastName = userModel.LastName;
@@ -232,7 +312,49 @@
                 var x = context.Users.Add(user);
                 Debug.WriteLine(x.ToString());
                 context.SaveChanges();
-                
+
+            }
+            else if (formMode == DetailFormMode.Edit)
+            {
+                user.FirstName = userModel.FirstName;
+
+                user.LastName = userModel.LastName;
+
+                user.MiddleNameOrInitial = userModel.MiddleNameOrInitial;
+
+                user.EmailAddress = userModel.EmailAddress;
+
+                user.PhoneNumber = userModel.PhoneNumber;
+
+                user.StreetAddress = userModel.StreetAddress;
+
+                user.City = userModel.City;
+
+                user.State = userModel.State;
+
+                user.ZipCode = userModel.ZipCode;
+
+                user.Title = userModel.Title;
+
+                // if (hireDate.HasValue)
+                // {
+                //     user.HireDate = hireDate.Value;
+                // }
+
+                //user.CreatedDate = DateTime.UtcNow;
+                //user.TerminationDate = DateTime.MinValue;
+                user.UpdatedDate = DateTime.UtcNow;
+                //user.CreatedBy = "admin";
+                user.UpdatedBy = "admin";
+                //user.IsActive = true;
+                //user.IsDeleted = false;
+                //user.Username = String.Concat(user.FirstName, ".", user.LastName);
+                //user.Password = Encryptor.HashPasswordV2("GoCerebus99");
+
+                //var x = context.Users.up;
+                //Debug.WriteLine(x.ToString());
+                await context.SaveChangesAsync();
+                Navigator.NavigateTo($"users/detail/view/{user.ID}");
             }
         }
         catch (Exception ex)
@@ -240,4 +362,6 @@
 
         }
     }
+
+
 }

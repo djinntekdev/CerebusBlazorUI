@@ -14,32 +14,43 @@
     Add New User
 </FluentButton>
 <br />
-<FluentCard  >
+<FluentCard MinimalStyle="true" Height="300px">
     <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
         <DataAnnotationsValidator />
         <FluentValidationSummary />
 
         <FluentGrid  AdaptiveRendering="true">
-            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.FirstName Label="First Name" Style="width:90%;"></FluentTextField>
                 </div>
-            </FluentGridItem>   
-            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+            </FluentGridItem>
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name"></FluentTextField>
+                    <FluentTextField @bind-Value=userModel.LastName Label="Last Name" Style="width:90%;"></FluentTextField>
                 </div>
-            </FluentGridItem>   
-            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+            </FluentGridItem>
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentDatePicker Label="Hire Date From:" @bind-Value=@hireDateStart  />
+                    <FluentTextField @bind-Value=userModel.Title Label="Title" Style="width:90%;"></FluentTextField>
                 </div>
-            </FluentGridItem>   
-            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+            </FluentGridItem>
+           
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentDatePicker Label="Hire Date To:" @bind-Value=@hireDateEnd  />
+                    <FluentDatePicker Label="Hire Date From:" @bind-Value=@hireDateStart />
                 </div>
-            </FluentGridItem>   
+            </FluentGridItem>
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentDatePicker Label="Hire Date To:" @bind-Value=@hireDateEnd />
+                </div>
+            </FluentGridItem>
+            <FluentGridItem lg="4" md="4" sm="4" xl="4">
+                <div>
+                    <FluentDatePicker Label="Hire Date To:" @bind-Value=@hireDateEnd />
+                </div>
+            </FluentGridItem>
             <FluentGridItem lg="12" md="12" sm="12" xl="12">
                 <div>
                     <FluentCheckbox @bind-Value="@isActive" Label="Include Inactive Users" />
@@ -62,12 +73,17 @@
 
     <div style="display: table; table-layout: fixed; width: 100%;">
         <div style="overflow-x: auto;">
-            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@(() => TestRecord(user))" TGridItem="User" AutoFit="true">
+            <FluentDataGrid Items="@Users" Pagination="@pagination" Style="min-width: max-content;" OnRowDoubleClick="@DoubleClickRecord" TGridItem="User" AutoFit="true">
                 <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
                 <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
+                <TemplateColumn Title="View">
+                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => ViewRecord(context))">View</FluentButton>
+                </TemplateColumn>
+                <TemplateColumn Title="View">
+                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => EditRecord(context))" BackgroundColor="Green">Edit</FluentButton>
+                </TemplateColumn>
                 <PropertyColumn Property="@(u => u.PhoneNumber)" Sortable="true" Title="Phone #" />
                 <PropertyColumn Property="@(u => u.EmailAddress)" Sortable="true" Title="Email" />
-                <PropertyColumn Property="@(u => u.Title)" Sortable="true" Title="Job Title" />
                 <PropertyColumn Property="@(u => u.HireDate)" Sortable="true" Title="Hire Date" />
                 @* <PropertyColumn Property="@(u => u.StreetAddress)" Sortable="true" Title="Address" /> *@
                 <PropertyColumn Property="@(u => u.City)" Sortable="true" Title="City" />
@@ -75,9 +91,7 @@
                 @* <PropertyColumn Property="@(u => u.ZipCode)" Sortable="true" Title="Zip" /> *@
                 <PropertyColumn Property="@(u => u.CreatedDate)" Sortable="true"  Title="Created On"/>
                 <PropertyColumn Property="@(u => u.UpdatedDate)" Sortable="true" Title="Updated On" />
-                <TemplateColumn Title="View">
-                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => ViewRecord(context))">View User</FluentButton>
-                </TemplateColumn>
+
             </FluentDataGrid>
         </div>
     </div>
@@ -100,11 +114,19 @@
 
     void ViewRecord(User u) 
     {
-        //TODO: Create the User Detail Page
         Navigator.NavigateTo($"users/detail/view/{u.ID}");
-
+    }
+    
+    void EditRecord(User u)
+    {
+        Navigator.NavigateTo($"users/detail/edit/{u.ID}");
     }
 
+    void DoubleClickRecord(FluentDataGridRow<User> row)
+    {
+        User? u = row.Item;
+        ViewRecord(u);
+    }
     private async Task TestRecord(User u)
     {
         IDialogReference? dialog;
@@ -119,6 +141,7 @@
     {
         Navigator.NavigateTo("/Users/Detail/Add");
     }
+
     public void HandleValidSubmit()
     {
         

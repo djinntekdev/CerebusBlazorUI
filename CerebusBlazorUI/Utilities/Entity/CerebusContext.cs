@@ -15,7 +15,7 @@ public class CerebusContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseMySQL("Server=localhost; User ID=bob.reed; Password=!#AdminPwd10; Database=dbo");
+      optionsBuilder.UseMySQL("Server=localhost; User ID=bobreed; Password=!#AdminPwd10; Database=cerebus");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
