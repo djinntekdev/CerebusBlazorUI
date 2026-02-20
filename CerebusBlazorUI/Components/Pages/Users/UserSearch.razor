@@ -59,6 +59,7 @@
             <FluentGridItem lg="12" md="12" sm="12" xl="12">
                 <div>
                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                    <FluentButton Type="ButtonType.Reset" OnClick="@ClearForm">Clear</FluentButton>
                 </div>
             </FluentGridItem>         
         </FluentGrid>
@@ -120,6 +121,20 @@
     void EditRecord(User u)
     {
         Navigator.NavigateTo($"users/detail/edit/{u.ID}");
+    }
+
+    public void ClearForm()
+    {
+        userModel.FirstName = string.Empty;
+        userModel.LastName = string.Empty;
+        userModel.MiddleNameOrInitial = string.Empty;
+        userModel.PhoneNumber = string.Empty;
+        userModel.EmailAddress = string.Empty;
+        userModel.StreetAddress = string.Empty;
+        userModel.City = string.Empty;
+        userModel.State = string.Empty;
+        userModel.ZipCode = string.Empty;
+        userModel.Title = string.Empty;
     }
 
     void DoubleClickRecord(FluentDataGridRow<User> row)
