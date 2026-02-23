@@ -15,7 +15,7 @@
 </FluentButton>
 <br />
 <FluentCard MinimalStyle="true" Height="300px">
-    <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_search" novalidate>
+    <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" FormName="user_search" novalidate>
         <DataAnnotationsValidator />
         <FluentValidationSummary />
 
@@ -181,6 +181,25 @@
             }
 
             Users = usersQuery.ToList().AsQueryable();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public async Task HandleInvalidSubmit()
+    {
+
+        try
+        {
+            //var x = context.Users;
+            IDialogReference? dialog;
+            DialogResult? messageBoxResult;
+            bool canceled;
+            dialog = await DialogService.ShowErrorAsync("Invalid Submit");
+            messageBoxResult = await dialog.Result;
+            canceled = messageBoxResult.Cancelled;
         }
         catch (Exception ex)
         {
