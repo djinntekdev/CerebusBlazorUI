@@ -9,11 +9,24 @@ namespace CerebusBlazorUI.Classes.Places;
 /// </summary>
 public class USState : RowBase
 {
+    #region Constructors 
 
-    [Required]
-    public required string Name { get; set; }
-    [Required]
-    public required string Abbreviation { get; set; }
+    public USState(string name, string abbrev)
+    {
+        Name = name;
+        Abbreviation = abbrev;
+    }
+
+    public USState()
+    {
+        Name = string.Empty;
+        Abbreviation = string.Empty;
+    }
+
+    #endregion 
+
+    public string Name { get; set; }
+    public string Abbreviation { get; set; }
 }
 
 public enum USStatesEnum

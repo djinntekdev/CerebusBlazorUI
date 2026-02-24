@@ -1,5 +1,6 @@
 ﻿@page "/Users/Detail/{formModeParameter}"
 @page "/Users/Detail/{formModeParameter}/{id:int}" 
+@using CerebusBlazorUI.Classes.Places
 @using CerebusBlazorUI.Utilities
 @using CerebusBlazorUI.Utilities.Enums
 @using CerebusBlazorUI.Classes.User
@@ -27,7 +28,7 @@
 <FluentCard>
     <EditForm Model="@userModel" OnValidSubmit="@HandleValidSubmit" FormName="user_detail" novalidate>
         <DataAnnotationsValidator />
-        <FluentValidationSummary /> 
+        <FluentValidationSummary />
         <FluentGrid  AdaptiveRendering="true">
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
@@ -76,7 +77,10 @@
             </FluentGridItem>   
             <FluentGridItem lg="4" md="4" sm="4" xl="4">
                 <div>
-                    <FluentTextField @bind-Value=userModel.State Label="State" ReadOnly="@isReadOnly" Appearance="@isShaded" Style="width:90%;"></FluentTextField>
+@*                     <FluentTextField @bind-Value=userModel.State Label="State" ReadOnly="@isReadOnly" Appearance="@isShaded" Style="width:90%;"></FluentTextField>
+ *@                    <FluentCombobox Placeholder="Select a State" Label="State" Items="@states" Height="200px" Style="width:90%;"
+                                    OptionValue="@(s => s.ID.ToString())" OptionText="@(s => $"{s.Name}")" Immediate ImmediateDelay="100" 
+                                                          @bind-SelectedOption=@selectedState TOption="USState" ReadOnly="@isReadOnly" Disabled="@isReadOnly" />
                     <FluentValidationMessage For="(() => userModel.State)" class="text-red-600 font-light" />
                 </div>
             </FluentGridItem>  
@@ -128,7 +132,10 @@
     DetailFormMode formMode;
     User user = new User();
     DateTime? hireDate;
-    UserModel userModel = new UserModel(); 
+    UserModel userModel = new UserModel();
+    USState selectedState = new USState();
+    List<USState> states = new List<USState>();
+
     string heading; 
 
     [Parameter]  
@@ -171,7 +178,10 @@
         {
             //TODO: throw exception, show 404
         }
-        else if (formModeParameter.ToLower() == "view")
+
+        states = context.USStates.ToList();
+
+        if (formModeParameter.ToLower() == "view")
         {
             formMode = DetailFormMode.View;
             isReadOnly = true;
@@ -193,6 +203,7 @@
                     userModel.ZipCode = user.ZipCode;
                     userModel.Title = user.Title;
                     userModel.HireDate = user.HireDate;
+                    selectedState = states.Where(s => s.ID.ToString() == user.State).FirstOrDefault();
                 }
             }
 
@@ -226,8 +237,10 @@
                     userModel.ZipCode = user.ZipCode;
                     userModel.Title = user.Title;
                     userModel.HireDate = user.HireDate;
+                    selectedState = states.Where(s => s.ID.ToString() == user.State).FirstOrDefault();
                 }
             }
+
             heading = $"Editing User {user.FirstName} {user.LastName}";
 
         }
@@ -258,6 +271,7 @@
         userModel.State = string.Empty;
         userModel.ZipCode = string.Empty;
         userModel.Title = string.Empty;
+        selectedState = new USState();
     }
 
     public async Task HandleValidSubmit()
@@ -303,9 +317,9 @@
                     user.City = userModel.City;
                 }  
 
-                if (!string.IsNullOrWhiteSpace(userModel.State))
+                if (selectedState is not null && selectedState.ID > 0)
                 {
-                    user.State = userModel.State;
+                    user.State = selectedState.ID.ToString();
                 }  
 
                 if (!string.IsNullOrWhiteSpace(userModel.ZipCode))
@@ -347,7 +361,7 @@
                 user.PhoneNumber = userModel.PhoneNumber;
                 user.StreetAddress = userModel.StreetAddress;
                 user.City = userModel.City;
-                user.State = userModel.State;
+                user.State = selectedState.ID.ToString();
                 user.ZipCode = userModel.ZipCode;
                 user.Title = userModel.Title;
 

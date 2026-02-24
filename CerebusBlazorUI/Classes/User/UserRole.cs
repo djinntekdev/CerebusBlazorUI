@@ -13,4 +13,5 @@ public class UserRole : RowBase
     [StringLength(100)]
     public string Name { get; set; }
     public bool IsAdmin { get; set; }
+    public bool IsManager { get; set; }
 }

@@ -56,6 +56,8 @@ public class User : RowBase
     //public int ManagerID { get; set; }
     //public bool isManager { get; set; }
     public DateTime? TerminationDate { get; set; }
+    public int USStateID { get; set; }
+    public USState USState { get; set; } = null!;
 
 
     #endregion
@@ -85,8 +87,8 @@ public class UserModel
     [Required(ErrorMessage = "City is required")]
     [StringLength(50)]
     public string? City { get; set; }
-    [Required(ErrorMessage = "State is required")]
-    [StringLength(25)]
+    //[Required(ErrorMessage = "State is required")]
+    //[StringLength(25)]
     public string? State { get; set; }
     [Required(ErrorMessage = "Zip Code is required")]
     [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Invalid Zip Code")]
@@ -94,5 +96,20 @@ public class UserModel
     public string? ZipCode { get; set; }
     public string? Title { get; set; }
     [Required(ErrorMessage = "Hire Date is required")]
+    public DateTime HireDate { get; set; }
+}
+
+public class UserSearchModel
+{
+    public string? FirstName { get; set; }
+    public string? MiddleNameOrInitial { get; set; }
+    public string? LastName { get; set; }
+    public string? EmailAddress { get; set; }
+    public string? PhoneNumber { get; set; }
+    public string? StreetAddress { get; set; }
+    public string? City { get; set; }
+    public string? State { get; set; }
+    public string? ZipCode { get; set; }
+    public string? Title { get; set; }
     public DateTime HireDate { get; set; }
 }
