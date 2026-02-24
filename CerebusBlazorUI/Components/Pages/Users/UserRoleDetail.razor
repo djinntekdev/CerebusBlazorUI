@@ -1,0 +1,312 @@
+﻿@page "/Users/Roles/Detail/{formModeParameter}"
+@page "/Users/Roles/Detail/{formModeParameter}/{id:int}" 
+@using CerebusBlazorUI.Classes.Places
+@using CerebusBlazorUI.Utilities
+@using CerebusBlazorUI.Utilities.Enums
+@using CerebusBlazorUI.Classes.User
+@using CerebusBlazorUI.Utilities.Entity
+@using Microsoft.VisualBasic
+@using System.Diagnostics
+@inject CerebusContext context
+@inject NavigationManager Navigator
+
+<h3>@heading</h3>
+
+@if (formMode == DetailFormMode.View)
+{
+    <FluentButton Appearance="Appearance.Accent" BackgroundColor="Green" Style="margin: 5px;" OnClick="@SetEditMode">
+        Edit Role
+    </FluentButton>
+}
+
+<FluentButton Appearance="Appearance.Accent" BackgroundColor="Green" Style="margin: 5px;" OnClick="@ReturnToSearch">
+    Return to Search
+</FluentButton>
+<br />
+
+<br />
+<FluentCard>
+    <EditForm Model="@role" OnValidSubmit="@HandleValidSubmit" FormName="user_detail" novalidate>
+        <DataAnnotationsValidator />
+        <FluentValidationSummary />
+        <FluentGrid AdaptiveRendering="true">
+            <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                <div>
+                    <FluentTextField @bind-Value=@role.Name Label="Name" ReadOnly="@isReadOnly" Appearance="@isShaded" Style="width:90%;" Maxlength="20"></FluentTextField>
+                    <FluentValidationMessage For="(() => role.Name)" class="text-red-600 font-light" />
+                </div>
+            </FluentGridItem>
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentCheckbox @bind-Value="@role.IsAdmin" Label="Is Admin Role" />
+                </div>
+            </FluentGridItem>            
+            <FluentGridItem lg="6" md="6" sm="6" xl="6">
+                <div>
+                    <FluentCheckbox @bind-Value="@role.IsManager" Label="Is Manager Role" />
+                </div>
+            </FluentGridItem>
+            @if (formMode == DetailFormMode.Add)
+            {
+                <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                    <div>
+                        <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Save</FluentButton>
+                        <FluentButton OnClick="@ReturnToSearch">Cancel</FluentButton>
+                    </div>
+                </FluentGridItem>
+            }
+            else if (formMode == DetailFormMode.Edit)
+            {
+                <FluentGridItem lg="12" md="12" sm="12" xl="12">
+                    <div>
+                        <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Save</FluentButton>
+                        <FluentButton OnClick="@SetViewMode">Cancel</FluentButton>
+                    </div>
+                </FluentGridItem>
+
+            }
+
+        </FluentGrid>
+
+    </EditForm>
+</FluentCard>
+
+@code {
+    DetailFormMode formMode;
+    UserRole role = new UserRole();
+    DateTime? hireDate;
+    // UserModel userModel = new UserModel();
+    // USState selectedState = new USState();
+    // List<USState> states = new List<USState>();
+
+    // role.UpdatedDate = DateTime.MinValue;
+    // role.CreatedBy = "admin";
+
+
+    string heading;
+
+    [Parameter]
+    public int? ID { get; set; }
+
+    [Parameter]
+    public required string formModeParameter { get; set; }
+
+    bool isReadOnly;
+    FluentInputAppearance isShaded;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+    }
+
+    public void SetEditMode()
+    {
+        Navigator.NavigateTo($"users/roles/detail/edit/{role.ID}");
+    }
+
+    public void SetViewMode()
+    {
+        Navigator.NavigateTo($"users/roles/detail/view/{role.ID}");
+    }
+
+    public void ReturnToSearch()
+    {
+        Navigator.NavigateTo($"/users/roles/search");
+    }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        ID = ID ?? -1;
+
+        if (string.IsNullOrWhiteSpace(formModeParameter))
+        {
+            //TODO: throw exception, show 404
+        }
+
+        if (formModeParameter.ToLower() == "view")
+        {
+            formMode = DetailFormMode.View;
+            isReadOnly = true;
+
+            if (ID.HasValue)
+            {
+                role = context.UserRoles.Where(u => u.ID == ID.Value).FirstOrDefault();
+
+                // if (user is not null)
+                // {
+                //     userModel.FirstName = user.FirstName;
+                //     userModel.LastName = user.LastName;
+                //     userModel.MiddleNameOrInitial = user.MiddleNameOrInitial;
+                //     userModel.PhoneNumber = user.PhoneNumber;
+                //     userModel.EmailAddress = user.EmailAddress;
+                //     userModel.StreetAddress = user.StreetAddress;
+                //     userModel.City = user.City;
+                //     userModel.State = user.State;
+                //     userModel.ZipCode = user.ZipCode;
+                //     userModel.Title = user.Title;
+                //     userModel.HireDate = user.HireDate;
+                //     selectedState = states.Where(s => s.ID.ToString() == user.State).FirstOrDefault();
+                // }
+            }
+
+            heading = $"User Role Detail for {role.Name}";
+        }
+        else if (formModeParameter.ToLower() == "add")
+        {
+            formMode = DetailFormMode.Add;
+            isReadOnly = false;
+            heading = $"Add New Role";
+        }
+        else if (formModeParameter.ToLower() == "edit")
+        {
+            formMode = DetailFormMode.Edit;
+            isReadOnly = false;
+
+            if (ID.HasValue)
+            {
+                role = context.UserRoles.Where(u => u.ID == ID.Value).FirstOrDefault();
+
+                // if (user is not null)
+                // {
+                //     userModel.FirstName = user.FirstName;
+                //     userModel.LastName = user.LastName;
+                //     userModel.MiddleNameOrInitial = user.MiddleNameOrInitial;
+                //     userModel.PhoneNumber = user.PhoneNumber;
+                //     userModel.EmailAddress = user.EmailAddress;
+                //     userModel.StreetAddress = user.StreetAddress;
+                //     userModel.City = user.City;
+                //     userModel.State = user.State;
+                //     userModel.ZipCode = user.ZipCode;
+                //     userModel.Title = user.Title;
+                //     userModel.HireDate = user.HireDate;
+                //     selectedState = states.Where(s => s.ID.ToString() == user.State).FirstOrDefault();
+                // }
+            }
+
+            heading = $"Editing User Role {role.Name}";
+
+        }
+        else
+        {
+            //TODO: throw exception, show 404
+        }
+
+        if (isReadOnly)
+        {
+            isShaded = FluentInputAppearance.Filled;
+        }
+        else
+        {
+            isShaded = FluentInputAppearance.Outline;
+        }
+
+        role.CreatedBy = "admin";
+        role.CreatedDate = DateTime.UtcNow;
+        role.UpdatedBy = "admin";
+        role.UpdatedDate = DateTime.UtcNow;
+    }
+
+    public void ClearForm()
+    {
+        role.Name = string.Empty;
+        role.IsAdmin = false;
+        role.IsManager = false;
+    }
+
+    public async Task HandleValidSubmit()
+    {
+        try
+        {
+            if (formMode == DetailFormMode.Add)
+            {
+                // User user = new User();
+
+                // if (!string.IsNullOrWhiteSpace(role.Name))
+                // {
+                //     user.FirstName = userModel.FirstName;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.LastName))
+                // {
+                //     user.LastName = userModel.LastName;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.MiddleNameOrInitial))
+                // {
+                //     user.MiddleNameOrInitial = userModel.MiddleNameOrInitial;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.EmailAddress))
+                // {
+                //     user.EmailAddress = userModel.EmailAddress;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.PhoneNumber))
+                // {
+                //     user.PhoneNumber = userModel.PhoneNumber;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.StreetAddress))
+                // {
+                //     user.StreetAddress = userModel.StreetAddress;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.City))
+                // {
+                //     user.City = userModel.City;
+                // }
+
+                // if (selectedState is not null && selectedState.ID > 0)
+                // {
+                //     user.State = selectedState.ID.ToString();
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.ZipCode))
+                // {
+                //     user.ZipCode = userModel.ZipCode;
+                // }
+
+                // if (!string.IsNullOrWhiteSpace(userModel.Title))
+                // {
+                //     user.Title = userModel.Title;
+                // }
+
+                // if (hireDate.HasValue)
+                // {
+                //     user.HireDate = hireDate.Value;
+                // }
+
+                role.CreatedDate = DateTime.UtcNow;
+                role.UpdatedDate = DateTime.UtcNow;
+                role.CreatedBy = "admin";
+                role.UpdatedBy = "admin";
+                role.IsActive = true;
+                role.IsDeleted = false;
+
+                var x = context.UserRoles.Add(role);
+                Debug.WriteLine(x.ToString());
+                context.SaveChanges();
+                Navigator.NavigateTo($"users/roles/detail/view/{role.ID}");
+
+
+            }
+            else if (formMode == DetailFormMode.Edit)
+            {
+                role.UpdatedDate = DateTime.UtcNow;
+                role.UpdatedBy = "admin";
+                //user.IsActive = true;
+                await context.SaveChangesAsync();
+                Navigator.NavigateTo($"users/roles/detail/view/{role.ID}");
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+
+}

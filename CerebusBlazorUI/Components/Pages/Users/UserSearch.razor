@@ -78,7 +78,7 @@
                 <PropertyColumn Property="@(u => u.FirstName)" Sortable="true" Title="First Name"/>
                 <PropertyColumn Property="@(u => u.LastName)" Sortable="true" Title="Last Name"/>
                 <TemplateColumn Title="View">
-                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => ViewRecord(context))">View</FluentButton>
+                    <FluentButton Appearance="Appearance.Accent" @onclick="@(() => ViewRecord(context))" Style="height=24px;">View</FluentButton>
                 </TemplateColumn>
                 <TemplateColumn Title="View">
                     <FluentButton Appearance="Appearance.Accent" @onclick="@(() => EditRecord(context))" BackgroundColor="Green">Edit</FluentButton>
@@ -94,6 +94,7 @@
                 <PropertyColumn Property="@(u => u.UpdatedDate)" Sortable="true" Title="Updated On" />
 
             </FluentDataGrid>
+            <FluentPaginator State="@pagination" />
         </div>
     </div>
 
@@ -111,7 +112,7 @@
     DateTime? hireDateStart;
     DateTime? hireDateEnd;
     IQueryable<User> Users = new List<User>().AsQueryable();
-    PaginationState pagination = new PaginationState() { ItemsPerPage = 10 };
+    PaginationState pagination = new PaginationState() { ItemsPerPage = 5 };
 
     void ViewRecord(User u) 
     {
@@ -181,6 +182,8 @@
             }
 
             Users = usersQuery.ToList().AsQueryable();
+
+            //foreach
         }
         catch (Exception ex)
         {

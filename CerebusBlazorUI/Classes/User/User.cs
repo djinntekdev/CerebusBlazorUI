@@ -56,8 +56,8 @@ public class User : RowBase
     //public int ManagerID { get; set; }
     //public bool isManager { get; set; }
     public DateTime? TerminationDate { get; set; }
-    public int USStateID { get; set; }
-    public USState USState { get; set; } = null!;
+    //public int USStateID { get; set; }
+    //public USState USState { get; set; } = null!;
 
 
     #endregion

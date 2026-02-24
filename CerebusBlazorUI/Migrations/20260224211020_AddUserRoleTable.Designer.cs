@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CerebusBlazorUI.Migrations
 {
     [DbContext(typeof(CerebusContext))]
-    [Migration("20260224201559_AddStateForeignKeyToUser")]
-    partial class AddStateForeignKeyToUser
+    [Migration("20260224211020_AddUserRoleTable")]
+    partial class AddUserRoleTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,624 +66,624 @@ namespace CerebusBlazorUI.Migrations
                             ID = 1,
                             Abbreviation = "AL",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8109),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9917),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Alabama",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8112)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
                             ID = 2,
                             Abbreviation = "AK",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8118),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9925),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Alaska",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8119)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9926)
                         },
                         new
                         {
                             ID = 3,
                             Abbreviation = "AZ",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8149),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9928),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Arizona",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8150)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9929)
                         },
                         new
                         {
                             ID = 4,
                             Abbreviation = "AR",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8154),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9931),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Arkansas",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8154)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9932)
                         },
                         new
                         {
                             ID = 5,
                             Abbreviation = "CA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8157),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9962),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "California",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8158)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9962)
                         },
                         new
                         {
                             ID = 6,
                             Abbreviation = "CO",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8160),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9965),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Colorado",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8161)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9965)
                         },
                         new
                         {
                             ID = 7,
                             Abbreviation = "CT",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8164),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9968),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Connecticut",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8164)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9968)
                         },
                         new
                         {
                             ID = 8,
                             Abbreviation = "DE",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8167),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9971),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Delaware",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8168)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9971)
                         },
                         new
                         {
                             ID = 9,
                             Abbreviation = "FL",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8170),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9974),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Florida",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8171)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 348, DateTimeKind.Utc).AddTicks(9974)
                         },
                         new
                         {
                             ID = 10,
                             Abbreviation = "GA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8174),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(8),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Georgia",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8174)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(9)
                         },
                         new
                         {
                             ID = 11,
                             Abbreviation = "HI",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8177),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(12),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Hawaii",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8177)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(12)
                         },
                         new
                         {
                             ID = 12,
                             Abbreviation = "ID",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8180),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(15),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Idaho",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8181)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(15)
                         },
                         new
                         {
                             ID = 13,
                             Abbreviation = "IL",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8183),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(17),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Illinois",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8183)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(18)
                         },
                         new
                         {
                             ID = 14,
                             Abbreviation = "IN",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8186),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(21),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Indiana",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8186)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(21)
                         },
                         new
                         {
                             ID = 15,
                             Abbreviation = "IA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8209),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(24),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Iowa",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8210)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(24)
                         },
                         new
                         {
                             ID = 16,
                             Abbreviation = "KS",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8213),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(27),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Kansas",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8214)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(27)
                         },
                         new
                         {
                             ID = 17,
                             Abbreviation = "KY",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8216),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(30),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Kentucky",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8217)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(30)
                         },
                         new
                         {
                             ID = 18,
                             Abbreviation = "LA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8219),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(33),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Louisiana",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8220)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(33)
                         },
                         new
                         {
                             ID = 19,
                             Abbreviation = "ME",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8222),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(35),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Maine",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8223)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(36)
                         },
                         new
                         {
                             ID = 20,
                             Abbreviation = "MD",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8225),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(38),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Maryland",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8226)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(39)
                         },
                         new
                         {
                             ID = 21,
                             Abbreviation = "MA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8229),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(41),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Massachusetts",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8229)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(42)
                         },
                         new
                         {
                             ID = 22,
                             Abbreviation = "MI",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8232),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(58),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Michigan",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8232)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(58)
                         },
                         new
                         {
                             ID = 23,
                             Abbreviation = "MN",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8235),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(61),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Minnesota",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8236)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(61)
                         },
                         new
                         {
                             ID = 24,
                             Abbreviation = "MS",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8238),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(64),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Mississippi",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8239)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(64)
                         },
                         new
                         {
                             ID = 25,
                             Abbreviation = "MO",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8242),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(67),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Missouri",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8242)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(67)
                         },
                         new
                         {
                             ID = 26,
                             Abbreviation = "MT",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8245),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(70),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Montana",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8245)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(70)
                         },
                         new
                         {
                             ID = 27,
                             Abbreviation = "NE",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8267),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(73),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Nebraska",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8267)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(73)
                         },
                         new
                         {
                             ID = 28,
                             Abbreviation = "NV",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8270),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(76),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Nevada",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8270)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(76)
                         },
                         new
                         {
                             ID = 29,
                             Abbreviation = "NH",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8273),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(79),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "New Hampshire",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8273)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(79)
                         },
                         new
                         {
                             ID = 30,
                             Abbreviation = "NJ",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8276),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(81),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "New Jersey",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8276)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(82)
                         },
                         new
                         {
                             ID = 31,
                             Abbreviation = "NM",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8279),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(84),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "New Mexico",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8279)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(85)
                         },
                         new
                         {
                             ID = 32,
                             Abbreviation = "NY",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8282),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(87),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "New York",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8282)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(88)
                         },
                         new
                         {
                             ID = 33,
                             Abbreviation = "NC",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8285),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(90),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "North Carolona",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8285)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(90)
                         },
                         new
                         {
                             ID = 34,
                             Abbreviation = "ND",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8288),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(106),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "North Dakota",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8289)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(107)
                         },
                         new
                         {
                             ID = 35,
                             Abbreviation = "OH",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8291),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(109),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Ohio",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8291)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(110)
                         },
                         new
                         {
                             ID = 36,
                             Abbreviation = "OK",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8294),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(112),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Oklahoma",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8295)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(113)
                         },
                         new
                         {
                             ID = 37,
                             Abbreviation = "OR",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8297),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(115),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Oregon",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8298)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(116)
                         },
                         new
                         {
                             ID = 38,
                             Abbreviation = "PA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8315),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(118),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Pennsylvania",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8316)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(118)
                         },
                         new
                         {
                             ID = 39,
                             Abbreviation = "RI",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8319),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(120),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Rhode Island",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8319)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(121)
                         },
                         new
                         {
                             ID = 40,
                             Abbreviation = "SC",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8322),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(123),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "South Carolina",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8323)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(124)
                         },
                         new
                         {
                             ID = 41,
                             Abbreviation = "SD",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8326),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(126),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "South Dakota",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8326)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(127)
                         },
                         new
                         {
                             ID = 42,
                             Abbreviation = "TN",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8329),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(129),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Tennessee",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8329)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(130)
                         },
                         new
                         {
                             ID = 43,
                             Abbreviation = "TX",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8332),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(132),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Texas",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8332)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(133)
                         },
                         new
                         {
                             ID = 44,
                             Abbreviation = "UT",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8363),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(135),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Utah",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8364)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(135)
                         },
                         new
                         {
                             ID = 45,
                             Abbreviation = "VT",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8367),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(138),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Vermont",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8367)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(138)
                         },
                         new
                         {
                             ID = 46,
                             Abbreviation = "VA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8370),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(140),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Virginia",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8370)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(141)
                         },
                         new
                         {
                             ID = 47,
                             Abbreviation = "WA",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8373),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(143),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Washington",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8373)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(144)
                         },
                         new
                         {
                             ID = 48,
                             Abbreviation = "WV",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8376),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(146),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "West Virginia",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8377)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(147)
                         },
                         new
                         {
                             ID = 49,
                             Abbreviation = "WI",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8379),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(149),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Wisconsin",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8380)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(149)
                         },
                         new
                         {
                             ID = 50,
                             Abbreviation = "WY",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8382),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(151),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Wyoming",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8383)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(152)
                         },
                         new
                         {
                             ID = 51,
                             Abbreviation = "DC",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8385),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(154),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "District of Columbia",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8386)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(155)
                         },
                         new
                         {
                             ID = 52,
                             Abbreviation = "PR",
                             CreatedBy = "admin",
-                            CreatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8389),
+                            CreatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(157),
                             IsActive = false,
                             IsDeleted = false,
                             Name = "Puerto Rico",
                             UpdatedBy = "admin",
-                            UpdatedDate = new DateTime(2026, 2, 24, 20, 15, 58, 310, DateTimeKind.Utc).AddTicks(8389)
+                            UpdatedDate = new DateTime(2026, 2, 24, 21, 10, 19, 349, DateTimeKind.Utc).AddTicks(157)
                         });
                 });
 
@@ -760,9 +760,6 @@ namespace CerebusBlazorUI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("USStateID")
-                        .HasColumnType("int");
-
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -782,8 +779,6 @@ namespace CerebusBlazorUI.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("USStateID");
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -800,12 +795,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Reed",
                             MiddleNameOrInitial = "L",
-                            Password = "AKH+3tDerSVGjhVbP8SZH5sjV0322crmA7kVSyO8R/27jVIiwvpfdcN+0MTD8TsBmw==",
+                            Password = "AM25rfn498HhSwjEwCgpnnXZGfmvMbdmp1R/gdZrpMMrIidHDSZ5Y7XwMJtR5g6SKg==",
                             PhoneNumber = "646-555-3047",
                             State = "32",
                             StreetAddress = "814 Geraldine Lane",
                             Title = "CEO",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2020, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Bob.Reed",
@@ -824,12 +818,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Carter",
                             MiddleNameOrInitial = "N",
-                            Password = "AJXWpzUAuRZAmtyZ9oUEGQ2NO/BZHSSlKBqeVZwkMtSBru64qVmIF17+hb4n3r7hhA==",
+                            Password = "AG07dIPyxsLdWzuyimzTiDgRQuKNjVYhrI7h4gOEF44css3vDE+gtRNBFItDeH7x1w==",
                             PhoneNumber = "716-555-3630",
                             State = "32",
                             StreetAddress = "2034 Jarvis Street",
                             Title = "HR Generalist",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Latoya.Carter",
@@ -848,12 +841,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Boyer",
                             MiddleNameOrInitial = "O",
-                            Password = "AKIXV3/R+gQXqTfwmIHVuID2q2l/6V2ld4RYXDikqZLkknwSJtGVd5SoKQWi5FnzBA==",
+                            Password = "AEkBh5o8HQlvRLo8Qau5U6Rx9fz980ifzZyLjsJ1Hv4DAI8rp193d9tofiLHZdEHEg==",
                             PhoneNumber = "508-555-2320",
                             State = "21",
                             StreetAddress = "3821 Randolph Street",
                             Title = "IT Director",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2021, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Joshua.Boyer",
@@ -872,12 +864,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "William",
                             MiddleNameOrInitial = "E",
-                            Password = "AAdp4SWloi37g1kbKmOOI+HTZp2VA34qhBYENzryNAWywuvmy4mr7SMBaxkAL8OdTA==",
+                            Password = "AHwSwAVpdIw/iyomRgpYKeA0M39/sJtJhWlEp3BroWjV8tS4oC4WVEAHMeLUF1ABsQ==",
                             PhoneNumber = "212-555-3480",
                             State = "32",
                             StreetAddress = "35 Godfrey Road",
                             Title = "Systems Administrator",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Sandy.William",
@@ -896,12 +887,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Cross",
                             MiddleNameOrInitial = "U",
-                            Password = "AGrlV6mXKpkETmyuFoM9WGtvjU7B1LHumC9T8LF+2++p+LjL0fyFI6rYNlahcIkSUw==",
+                            Password = "AKBsiXg5u9k+egRFlltrlsCpwQOFMHclovvhfe1m3aYkURCLuXBD20qhseIywSoqCA==",
                             PhoneNumber = "860-555-0200",
                             State = "7",
                             StreetAddress = "459 Hart Street",
                             Title = "IT Technician",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Christopher.Cross",
@@ -920,12 +910,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Ryan",
                             MiddleNameOrInitial = "M",
-                            Password = "ACPHQhZpTpqVLD2x9wt8yOxCn+MLvSYMkTbSCClUf/ZWWuYr0syzC2Uj6cnMUxelCw==",
+                            Password = "AAMClsiMmi7Owm+pD2iD8ZZkXpv9FvcNd16jgzuUuzshwwc2EKCjEbZ4wJhEQ8AFLQ==",
                             PhoneNumber = "518-555-2034",
                             State = "32",
                             StreetAddress = "3564 Hardesty Street",
                             Title = "IT Technician",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2024, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Trevor.Ryan",
@@ -944,12 +933,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Dawson",
                             MiddleNameOrInitial = "R",
-                            Password = "AK0WsFSQKaspM+quZP+aHsg7+KB5WeQgZqvB2tuK+X9VDqB5KaH9xsJMub1HdD2t4g==",
+                            Password = "AFbewvagJch2bMDVEsA+f43ZGGOTHd2ThZUbyMNHzfmahpvN16eY09oDfi0OsLmrZA==",
                             PhoneNumber = "207-555-2113",
                             State = "19",
                             StreetAddress = "262 Victoria Court",
                             Title = "Software Developer",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Arlene.Dawson",
@@ -968,12 +956,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Hartman",
                             MiddleNameOrInitial = "A",
-                            Password = "AGI6/IWblm10FIeUIsmi6omtgxDnHLLbXKXuSwbHX5cXTzgDhMYXCQyQQj+LAALzJg==",
+                            Password = "AD0BjkmEDliraWhIW6yrv8nYb1YafYy2f16K9C6YDioa9XIds/hQ5obJNWiZIA00hA==",
                             PhoneNumber = "814-555-1968",
                             State = "38",
                             StreetAddress = "2797 Coal Street",
                             Title = "Customer Service Manager",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2024, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Anna.Hartman",
@@ -992,12 +979,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "James",
                             MiddleNameOrInitial = "W",
-                            Password = "APD0ViYfX3fMQBekx2BefgBwoagAlTWdkCflOHkB5IiU/fTIPX9PsZbLUQmEXMScIw==",
+                            Password = "ACXX7jLhQoMmT1zqz7a8RCNEjetvJzw2fEN4Hp4uPtKCkqz9o8czoBe2Uxq0ZRfYSQ==",
                             PhoneNumber = "908-555-4192",
                             State = "30",
                             StreetAddress = "1198 Hedge Street",
                             Title = "Customer Service Representative",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Janette.James",
@@ -1016,12 +1002,11 @@ namespace CerebusBlazorUI.Migrations
                             IsDeleted = false,
                             LastName = "Harmon",
                             MiddleNameOrInitial = "T",
-                            Password = "ANLNjglkmVgYNj/LiLTbw+RPDO8B87Gkz8tMM46ae25TlMPEvocQ4NHweu3TT6/EhQ==",
+                            Password = "APsU4dqJry6dGFirAR4LnkLfrx/LiKFfcZmLvtRYPnpjbt0ClkLrHSPvZ2jObIFxHA==",
                             PhoneNumber = "315-555-7346",
                             State = "32",
                             StreetAddress = "1698 Saint Marys Avenue",
                             Title = "Customer Service Representative",
-                            USStateID = 0,
                             UpdatedBy = "admin",
                             UpdatedDate = new DateTime(2025, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Van.Harmon",
@@ -1029,15 +1014,46 @@ namespace CerebusBlazorUI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CerebusBlazorUI.Classes.User.User", b =>
+            modelBuilder.Entity("CerebusBlazorUI.Classes.User.UserRole", b =>
                 {
-                    b.HasOne("CerebusBlazorUI.Classes.Places.USState", "USState")
-                        .WithMany()
-                        .HasForeignKey("USStateID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("USState");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

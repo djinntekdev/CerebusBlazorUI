@@ -12,6 +12,8 @@ public class CerebusContext : DbContext
 { }
     public DbSet<User> Users { get; set; }
     public DbSet<USState> USStates { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
+
     //public DbSet<Publisher> Publisher { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
