@@ -166,6 +166,11 @@
             //var x = context.Users;
             var usersQuery = context.Users.Where(u => true);
 
+            // usersQuery = from u in context.Set<User>()
+            //              join ur in context.Set<UserRole>()
+            //                  on u.UserRoleID equals ur.ID
+            //              select new { u, ur };
+
             if (!string.IsNullOrWhiteSpace(userModel.FirstName))
             {
                 usersQuery = usersQuery.Where(u => u.FirstName == userModel.FirstName);
@@ -181,9 +186,18 @@
                 usersQuery = usersQuery.Where(u => u.IsActive == true);
             }
 
+            var userList = usersQuery.ToList();
+
+            foreach (var user in userList)
+            {
+                if (user.UserRole is null)
+                {
+                    user.UserRole = context.UserRoles.Where(u => u.ID == user.UserRoleID).FirstOrDefault();
+                }
+            }
+
             Users = usersQuery.ToList().AsQueryable();
 
-            //foreach
         }
         catch (Exception ex)
         {

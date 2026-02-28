@@ -58,6 +58,8 @@ public class User : RowBase
     public DateTime? TerminationDate { get; set; }
     //public int USStateID { get; set; }
     //public USState USState { get; set; } = null!;
+    public int? UserRoleID { get; set; }
+    public UserRole? UserRole { get; set; } = null!;
 
 
     #endregion
@@ -97,6 +99,9 @@ public class UserModel
     public string? Title { get; set; }
     [Required(ErrorMessage = "Hire Date is required")]
     public DateTime HireDate { get; set; }
+
+    public UserRole? UserRole { get; set; } = null!;
+
 }
 
 public class UserSearchModel
@@ -112,4 +117,8 @@ public class UserSearchModel
     public string? ZipCode { get; set; }
     public string? Title { get; set; }
     public DateTime HireDate { get; set; }
+    public DateTime BeginHireDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public UserRole? UserRole { get; set; } = null!;
+
 }

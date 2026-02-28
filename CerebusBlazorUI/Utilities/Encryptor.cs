@@ -17,6 +17,17 @@ public static class Encryptor
 
     #region Password Hashing
 
+    public static string GetHashedPassword(string password)
+    {
+        string hashedPassword = string.Empty;
+        string prefix = "C3r3bb3gin";
+        string suffix = "C3r3b3nd";
+        string paddedPassword = string.Concat(prefix, password, suffix);
+        hashedPassword = Base64Encode(paddedPassword);
+
+        return hashedPassword;
+    }
+
     public static string HashPasswordV2(string password)
     {
         
@@ -144,6 +155,22 @@ public static class Encryptor
                 return result;
             }
         }
+    }
+
+    #endregion
+
+    #region Base64
+
+    public static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    public static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
 
     #endregion

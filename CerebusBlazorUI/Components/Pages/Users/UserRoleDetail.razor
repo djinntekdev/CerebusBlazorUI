@@ -288,7 +288,7 @@
 
                 var x = context.UserRoles.Add(role);
                 Debug.WriteLine(x.ToString());
-                context.SaveChanges();
+                await context.SaveChangesAsync(); 
                 Navigator.NavigateTo($"users/roles/detail/view/{role.ID}");
 
 

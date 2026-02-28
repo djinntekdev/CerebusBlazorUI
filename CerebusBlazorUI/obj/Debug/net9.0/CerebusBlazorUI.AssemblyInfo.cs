@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CerebusBlazorUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39098cf880cd7c3ba404d0236e0c041188805aa7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d9cc5500c6c6da766ddfffe3ff4d56c9b9495f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("CerebusBlazorUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CerebusBlazorUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

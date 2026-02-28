@@ -203,7 +203,14 @@
                     userModel.ZipCode = user.ZipCode;
                     userModel.Title = user.Title;
                     userModel.HireDate = user.HireDate;
+
                     selectedState = states.Where(s => s.ID.ToString() == user.State).FirstOrDefault();
+
+                    if (user.UserRole is null)
+                    {
+                        user.UserRole = context.UserRoles.Where(u => u.ID == user.UserRoleID).FirstOrDefault();
+                        userModel.UserRole = user.UserRole;
+                    }
                 }
             }
 

@@ -3,8 +3,19 @@
 @using CerebusBlazorUI.Utilities
 @using CerebusBlazorUI.Utilities.Entity
 @using CerebusBlazorUI.Classes.User;
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authorization
+@using System.IdentityModel.Tokens.Jwt
+@using Microsoft.IdentityModel.Tokens
+@using System.Text
 @inject IDialogService DialogService
 @inject CerebusContext context
+@inject IToastService ToastService
+@inject IHttpContextAccessor HttpContextAccessor
+
 
 
 
@@ -43,8 +54,7 @@
     bool buttonsDisabled = true; 
     string loginMessage = "Error!";
     // Style="border-style: solid; border-color: red;"
-
-     
+    HttpContext httpcontext;
 
     void OnUsernameChanged(string newValue)
     {
@@ -70,7 +80,7 @@
         StateHasChanged();
     }
 
-void OnPasswordChanged(string newValue)
+    void OnPasswordChanged(string newValue)
     {
         if (newValue != null && !string.IsNullOrWhiteSpace(newValue))
         {
@@ -101,26 +111,96 @@ void OnPasswordChanged(string newValue)
         LoginResult result = new LoginResult();
         IDialogReference? dialog;
         DialogResult? messageBoxResult;
- 
+
+        // httpcontext = new HttpContext();
+
 #line default
 
         try
         {
+            string password = string.Empty;
 
-            string password = Encryptor.HashPasswordV2(credentials.Password.Trim());
+            if (!string.IsNullOrWhiteSpace(credentials.Password))
+            {
+                string _pass = credentials.Password.Trim();
+                password = Encryptor.GetHashedPassword(_pass);
+            }
+
 
             User user = context.Users
                 .Where(u => u.Username == credentials.Username.Trim() 
-                    && u.Password == password 
+                    && u.Password == password
                     && u.IsActive)
                 .SingleOrDefault();
-            
+
             if (user is null)
             {
-                //Raise error, user not found.
+                ToastService.ShowError("User not found");
                 return;
             }
-            
+            else
+            {
+                result.Success = true;
+                result.ErrorOccurred = false;
+                result.StatusCode = 200;
+                result.BadPassWord = false;
+                result.BadUserName = false;
+                result.Time = DateTime.UtcNow;
+                result.UserName = credentials.Username;
+                ToastService.ShowSuccess("Login Success!!");
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
+                    new Claim(ClaimTypes.Email, user.EmailAddress),
+                    // new Claim(ClaimTypes.Role, user.Role),
+                };
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KeyForSignInSecret@1234"));
+
+                var token = new JwtSecurityToken(
+                    issuer: "yourdomain.com",
+                    audience: "yourdomain.com",
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddDays(7),
+                    signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256)
+                );
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+    //                         var claimsIdentity = new ClaimsIdentity(
+    // claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    //AllowRefresh = <bool>,
+                    // Refreshing the authentication session should be allowed.
+
+                    //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                    // The time at which the authentication ticket expires. A
+                    // value set here overrides the ExpireTimeSpan option of
+                    // CookieAuthenticationOptions set with AddCookie.
+
+                    //IsPersistent = true,
+                    // Whether the authentication session is persisted across
+                    // multiple requests. When used with cookies, controls
+                    // whether the cookie's lifetime is absolute (matching the
+                    // lifetime of the authentication ticket) or session-based.
+
+                    //IssuedUtc = <DateTimeOffset>,
+                    // The time at which the authentication ticket was issued.
+
+                    //RedirectUri = <string>
+                    // The full path or absolute URI to be used as an http
+                    // redirect response value.
+                };
+                // var hCtx = new HttpContext();
+
+                // await HttpContextAccessor.HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+                // await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                // await Microsoft.AspNetCore.Http
+
+            }
+
             @* if (string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password))
             {
                 dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
@@ -129,7 +209,7 @@ void OnPasswordChanged(string newValue)
             } *@
 
 
-            result.Message = string.Empty;
+            //result.Message = string.Empty;
 
             @* if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
             {
