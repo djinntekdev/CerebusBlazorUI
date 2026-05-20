@@ -4,6 +4,7 @@
 @using CerebusBlazorUI.Utilities.Entity
 @using CerebusBlazorUI.Classes.User;
 @using System.Security.Claims
+@using CerebusBlazorUI.Utilities.Session
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Authentication.Cookies
 @using Microsoft.AspNetCore.Http
@@ -14,7 +15,8 @@
 @inject IDialogService DialogService
 @inject CerebusContext context
 @inject IToastService ToastService
-@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager Navigator
+@inject ProtectedSessionStorage Storage
 
 
 
@@ -55,6 +57,7 @@
     string loginMessage = "Error!";
     // Style="border-style: solid; border-color: red;"
     HttpContext httpcontext;
+    bool isLoaded = false;
 
     void OnUsernameChanged(string newValue)
     {
@@ -105,6 +108,43 @@
         // Perform some other actions 
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var result = await Storage.GetAsync<string>("mySessionKey");
+
+            if (result.Success)
+            {
+                //sessionData = result.Value;
+            }
+
+            isLoaded = true;
+            StateHasChanged(); // Refresh UI
+        }
+    }
+
+    public async Task StartSession(User user)
+    {
+        try
+        {
+            UserSession SessionData = new UserSession(user);
+            SessionData.SessionStartTime = DateTime.UtcNow;
+            SessionData.LastActivity = DateTime.UtcNow;
+            SessionData.SessionExpiration = DateTime.UtcNow.AddMinutes(30d);
+            SessionData.IsSessionActive = true;
+            SessionData.CanExtend = true;
+
+            //TokenManager.
+
+            await Storage.SetAsync("session", SessionData);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
     private async Task StartLogin() 
     {
         //string credentials.U = "robert.reed";
@@ -126,22 +166,46 @@
                 password = Encryptor.GetHashedPassword(_pass);
             }
 
+            // Verify Active User Exists in db
 
             User user = context.Users
                 .Where(u => u.Username == credentials.Username.Trim() 
-                    && u.Password == password
+                    //&& u.Password == password
                     && u.IsActive)
                 .SingleOrDefault();
 
             if (user is null)
             {
+                result.Success = false;
+                result.ErrorOccurred = false;
+                result.StatusCode = 404;
+                result.BadPassWord = false;
+                result.BadUserName = false;
+                result.Time = DateTime.UtcNow;
+                result.UserName = credentials.Username;
                 ToastService.ShowError("User not found");
                 return;
             }
             else
             {
+                UserRole role = context.UserRoles.Where(ur => ur.ID == user.UserRoleID).FirstOrDefault();
+
+                if (role is null)
+                {
+                    result.Success = false;
+                    result.ErrorOccurred = false;
+                    result.StatusCode = 404;
+                    result.BadPassWord = false;
+                    result.BadUserName = false;
+                    result.Time = DateTime.UtcNow;
+                    result.UserName = credentials.Username;
+                    ToastService.ShowError("User role is missing.");
+                    return;
+                }
+                    
+                user.UserRole = role;
                 result.Success = true;
-                result.ErrorOccurred = false;
+                result.ErrorOccurred = false; 
                 result.StatusCode = 200;
                 result.BadPassWord = false;
                 result.BadUserName = false;
@@ -149,59 +213,81 @@
                 result.UserName = credentials.Username;
                 ToastService.ShowSuccess("Login Success!!");
 
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-                    new Claim(ClaimTypes.Email, user.EmailAddress),
-                    // new Claim(ClaimTypes.Role, user.Role),
-                };
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KeyForSignInSecret@1234"));
+                //Begin Session
 
-                var token = new JwtSecurityToken(
-                    issuer: "yourdomain.com",
-                    audience: "yourdomain.com",
-                    claims: claims,
-                    expires: DateTime.UtcNow.AddDays(7),
-                    signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256)
-                );
+                await StartSession(user);
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-    //                         var claimsIdentity = new ClaimsIdentity(
-    // claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                //Redirect to dashboard
 
-                var authProperties = new AuthenticationProperties
-                {
-                    //AllowRefresh = <bool>,
-                    // Refreshing the authentication session should be allowed.
-
-                    //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                    // The time at which the authentication ticket expires. A
-                    // value set here overrides the ExpireTimeSpan option of
-                    // CookieAuthenticationOptions set with AddCookie.
-
-                    //IsPersistent = true,
-                    // Whether the authentication session is persisted across
-                    // multiple requests. When used with cookies, controls
-                    // whether the cookie's lifetime is absolute (matching the
-                    // lifetime of the authentication ticket) or session-based.
-
-                    //IssuedUtc = <DateTimeOffset>,
-                    // The time at which the authentication ticket was issued.
-
-                    //RedirectUri = <string>
-                    // The full path or absolute URI to be used as an http
-                    // redirect response value.
-                };
-                // var hCtx = new HttpContext();
-
-                // await HttpContextAccessor.HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
-                // await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-                // await Microsoft.AspNetCore.Http
-
+                Navigator.NavigateTo($"/");
             }
 
-            @* if (string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password))
+        }
+        catch (Exception ex)
+        {
+            result.Message = ex.Message;
+        }
+        finally
+        {
+
+        }
+    }
+
+    #region Old Snipplets
+
+    private void oldStartLogin()
+    {
+        // var claims = new List<Claim>
+        // {
+        //     new Claim(ClaimTypes.Name, user.Username),
+        //     new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
+        //     new Claim(ClaimTypes.Email, user.EmailAddress),
+        //     // new Claim(ClaimTypes.Role, user.Role),
+        // };
+        // var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KeyForSignInSecret@1234"));
+
+        // var token = new JwtSecurityToken(
+        //     issuer: "yourdomain.com",
+        //     audience: "yourdomain.com",
+        //     claims: claims,
+        //     expires: DateTime.UtcNow.AddDays(7),
+        //     signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256)
+        // );
+
+        // var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+        //                         var claimsIdentity = new ClaimsIdentity(
+        // claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        // var authProperties = new AuthenticationProperties
+        // {
+        //AllowRefresh = <bool>,
+        // Refreshing the authentication session should be allowed.
+
+        //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+        // The time at which the authentication ticket expires. A
+        // value set here overrides the ExpireTimeSpan option of
+        // CookieAuthenticationOptions set with AddCookie.
+
+        //IsPersistent = true,
+        // Whether the authentication session is persisted across
+        // multiple requests. When used with cookies, controls
+        // whether the cookie's lifetime is absolute (matching the
+        // lifetime of the authentication ticket) or session-based.
+
+        //IssuedUtc = <DateTimeOffset>,
+        // The time at which the authentication ticket was issued.
+
+        //RedirectUri = <string>
+        // The full path or absolute URI to be used as an http
+        // redirect response value.
+        // };
+        // var hCtx = new HttpContext();
+
+        // await HttpContextAccessor.HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+        // await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+        // await Microsoft.AspNetCore.Http
+
+        @* if (string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password))
             {
                 dialog = await DialogService.ShowErrorAsync("Access Denied: Bad Logon Credentials!");
                 messageBoxResult = await dialog.Result;
@@ -209,9 +295,9 @@
             } *@
 
 
-            //result.Message = string.Empty;
+        //result.Message = string.Empty;
 
-            @* if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
+        @* if (credentials.Username.Equals(username) && credentials.Password.Equals(password))
             {
                 result.Success = true;
                 result.ErrorOccurred = false;
@@ -244,15 +330,10 @@
                 messageBoxResult = await dialog.Result;
                 canceled = messageBoxResult.Cancelled;
             } *@
-        }
-        catch (Exception ex)
-        {
-            result.Message = ex.Message;
-        }
-        finally
-        {
 
-        }
     }
+
+    #endregion
+
 }
 

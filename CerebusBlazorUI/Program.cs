@@ -1,13 +1,15 @@
 using CerebusBlazorUI.Components;
 using CerebusBlazorUI.Utilities.Entity;
+using CerebusBlazorUI.Utilities.Session;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddMemoryCache();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -46,6 +48,8 @@ builder.Services.AddDbContext<CerebusContext>(options =>
     options.UseMySQL("Server=localhost; User ID=bobreed; Password=!#AdminPwd10; Database=cerebus"));
 //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
+
+//builder.Services.AddSingleton<ApplicationAccessTokenManager>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
